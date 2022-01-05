@@ -1,4 +1,3 @@
-
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {Navbar} from './components';
 import {Game, Home, Show} from './routes';
@@ -16,6 +15,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-
+}
 
 export default App;
