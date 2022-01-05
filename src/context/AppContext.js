@@ -1,17 +1,27 @@
-import React, { useContext, useEffect } from "react";
+import { onSnapshot } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { petStoreRef } from "../firebase";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  const [list,setList]=useState([]);
+
   const getData = () => {
-    console.log("????")
+    onSnapshot(petStoreRef,(snapshot)=>{
+      let tempStore=[];
+      snapshot.docs.map(item=>{
+        return tempStore.push({...item.data(),id:item.id});
+      })
+      setList(tempStore);
+    })
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{list}}>{children}</AppContext.Provider>;
 };
 
 export const useGlobalContext = () => {
