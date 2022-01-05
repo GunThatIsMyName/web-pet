@@ -1,10 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const image =
-  "https://firebasestorage.googleapis.com/v0/b/facebook-messenger-clone-8c670.appspot.com/o/images%2F%E1%84%86%E1%85%A9%E1%84%8C%E1%85%A11.png?alt=media&token=367d4e89-4138-43e3-ba02-0a6f8f2c0cc9";
-
-  
+  'https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg';
 function Game() {
   return (
     <Wrapper back={image}>
