@@ -1,7 +1,7 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import styled from "styled-components";
-import ControlList from "./ControlList";
+import React from 'react';
+import {Outlet} from 'react-router-dom';
+import styled from 'styled-components';
+import ControlList from './ControlList';
 
 function GameControl() {
   return (
@@ -16,8 +16,8 @@ const Wrapper = styled.div`
   width: 800px;
   height: 600px;
   background-color: #fff;
-  position: relative;
-  
+  overflow-y: auto;
+  border-radius: 10px;
 `;
 
 export default GameControl;

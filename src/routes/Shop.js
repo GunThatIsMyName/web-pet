@@ -35,14 +35,17 @@ function Shop() {
             filteredList.map((item) => {
               const {price, id, img} = item;
               return (
-                <div key={id}>
-                  <div className="filtered__list" key={id}>
-                    <div className="filtered__list-item">
-                      <img src={img} alt={id} />
-                      <h4> 💰 {price}0</h4>
-                    </div>
-                    <button onClick={handleBtn}>구매하기</button>
-                  </div>
+                <div className="filtered__list" key={id}>
+                  {img && (
+                    <>
+                      <div className="filtered__list-item">
+                        <img src={img} alt={id} />
+                        <h4> 💰 {price}0</h4>
+                      </div>
+                      <button>착용하기</button>
+                      <button onClick={handleBtn}>구매하기</button>
+                    </>
+                  )}
                 </div>
               );
             })}
