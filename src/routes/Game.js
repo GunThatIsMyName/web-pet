@@ -1,4 +1,5 @@
 import React from 'react';
+import {Outlet} from 'react-router-dom';
 import styled from 'styled-components';
 
 const image =
@@ -7,7 +8,9 @@ function Game() {
   return (
     <Wrapper back={image}>
       <div className="game__main"></div>
-      <div className="game__control"></div>
+      <div className="game__control">
+        <Outlet />
+      </div>
     </Wrapper>
   );
 }
