@@ -8,6 +8,7 @@ function Shop() {
 
   useEffect(() => {
     getFilterData(name);
+    // eslint-disable-next-line
   }, [name]);
 
   return (

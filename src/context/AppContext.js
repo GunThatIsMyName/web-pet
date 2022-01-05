@@ -9,6 +9,10 @@ const AppProvider = ({children}) => {
   const [filteredList, setFilteredList] = useState([]);
   const [name, setName] = useState('');
 
+  const handleClick = (e) => {
+    setName(e.target.dataset.name);
+  };
+
   const getData = () => {
     onSnapshot(petStoreRef, (snapshot) => {
       let tempStore = [];
@@ -22,15 +26,12 @@ const AppProvider = ({children}) => {
   const getFilterData = (name) => {
     const filteredData = list.find((item) => {
       if (item.type === name) {
-        return item.items;
+        return item;
       }
+      return null;
     });
     const filteredItem = filteredData && filteredData.items;
     setFilteredList(filteredItem);
-  };
-
-  const handleClick = (e) => {
-    setName(e.target.dataset.name);
   };
 
   useEffect(() => {
