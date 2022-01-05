@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "firebase": "^9.6.1",
     "styled-components": "^5.3.3"
   }
 }
