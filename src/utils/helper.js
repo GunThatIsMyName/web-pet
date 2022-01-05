@@ -43,8 +43,6 @@ const levelList = [
   {level:4,icon:"🏅 "},
   {level:5,icon:"🐯 "},
 ]
-
-
 const medalList = (level)=>{
   let newMedal;
   levelList.find(item=>{
@@ -55,5 +53,8 @@ const medalList = (level)=>{
   })
   return newMedal
 }
+
+
+
 
 export {shop_list,medalList};

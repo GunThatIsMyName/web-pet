@@ -19,11 +19,6 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-
-  .game {
-    .game__box {
-    }
-  }
   @media screen and (max-width: 991px) {
     flex-direction: column;
     gap: 0;

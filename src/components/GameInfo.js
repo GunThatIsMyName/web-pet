@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { medalList } from "../utils/helper";
 import GameLevel from "./GameLevel";
 import GamePanel from "./GamePanel";
 
