@@ -24,6 +24,7 @@ const AppProvider = ({children}) => {
       if (item.type === name) {
         return item.items;
       }
+      return null;
     });
     const filteredItem = filteredData && filteredData.items;
     setFilteredList(filteredItem);

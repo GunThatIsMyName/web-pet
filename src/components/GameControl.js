@@ -13,16 +13,11 @@ function GameControl() {
 }
 
 const Wrapper = styled.div`
-  width: 500px;
-  height: 400px;
+  width: 800px;
+  height: 600px;
   background-color: orange;
   position: relative;
   
-  @media screen and (max-width:991px){
-    flex-direction:column;
-    gap:0;
-    width:400px;
-  }
 `;
 
 export default GameControl;
