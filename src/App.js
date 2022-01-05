@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {Navbar} from './components';
 import {Game, Home, Show} from './routes';
 
-function App() {
+const App=()=> {
   return (
     <div className="App">
       <BrowserRouter>
@@ -16,5 +16,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

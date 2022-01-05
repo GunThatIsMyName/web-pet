@@ -1,8 +1,16 @@
-import React, {useContext} from 'react';
+import React, { useContext, useEffect } from "react";
 
 const AppContext = React.createContext();
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
+  const getData = () => {
+    console.log("????")
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
 };
 
