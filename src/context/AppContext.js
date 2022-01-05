@@ -7,31 +7,38 @@ const AppContext = React.createContext();
 const AppProvider = ({children}) => {
   const [list, setList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState('hair');
+  const handleClick = (e) => {
+    setName(e.target.dataset.name);
+  };
 
   const getData = () => {
-    onSnapshot(petStoreRef, (snapshot) => {
-      let tempStore = [];
-      snapshot.docs.map((item) => {
-        return tempStore.push({...item.data(), id: item.id});
+    try {
+      onSnapshot(petStoreRef, (snapshot) => {
+        let tempStore = [];
+        snapshot.docs.map((item) => {
+          return tempStore.push({...item.data(), id: item.id});
+        });
+        setList(tempStore);
       });
-      setList(tempStore);
-    });
+    } catch (error) {
+      return error;
+    }
   };
 
   const getFilterData = (name) => {
-    const filteredData = list.find((item) => {
-      if (item.type === name) {
-        return item.items;
-      }
-      return null;
-    });
-    const filteredItem = filteredData && filteredData.items;
-    setFilteredList(filteredItem);
-  };
-
-  const handleClick = (e) => {
-    setName(e.target.dataset.name);
+    try {
+      const filteredData = list.find((item) => {
+        if (item.type === name) {
+          return item;
+        }
+        return null;
+      });
+      const filteredItem = filteredData && filteredData.items;
+      setFilteredList(filteredItem);
+    } catch (error) {
+      return error;
+    }
   };
 
   useEffect(() => {
@@ -40,7 +47,14 @@ const AppProvider = ({children}) => {
 
   return (
     <AppContext.Provider
-      value={{list, getData, getFilterData, handleClick, filteredList, name}}
+      value={{
+        list,
+        getData,
+        getFilterData,
+        handleClick,
+        filteredList,
+        name,
+      }}
     >
       {children}
     </AppContext.Provider>
