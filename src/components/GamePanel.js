@@ -23,12 +23,8 @@ function GamePanel() {
                 ></div>
               </div>
               <div className="info__etc">
+                  <p>{width}/100</p>
                 <h1>{name}</h1>
-                <div className="info__etc__box">
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                </div>
               </div>
             </div>
           </div>
@@ -39,26 +35,25 @@ function GamePanel() {
 }
 
 const Wrapper = styled.div`
-  background: tomato;
   padding: 1rem;
   .info__item {
     display: grid;
-    grid-template-columns:auto 1fr;
+    grid-template-columns: auto 1fr;
 
-    .info__box{
-        display:flex;
-        flex-direction:column;
-        width:90%;
-        align-items:center;
-        margin: 0 1rem;
-        .info__bar{
-            margin-top:4px;
-            width:100%;
-            height:10px;
-            border-radius:10px;
-            background-color:black;
-            position: relative;
-            .info__progress {
+    .info__box {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      align-items: center;
+      margin: 0 1rem;
+      .info__bar {
+        margin-top: 4px;
+        width: 100%;
+        height: 10px;
+        border-radius: 3px;
+        background-color: #36215D;
+        position: relative;
+        .info__progress {
           position: absolute;
           left: 0;
           top: 0;
@@ -66,17 +61,17 @@ const Wrapper = styled.div`
           border-radius: inherit;
           background-color: yellow;
         }
-        }
+      }
     }
-    .info__etc{
-        margin:6px 0;
-        width:100%;
-        display:flex;
-        justify-content:space-between;
+    .info__etc {
+      margin: 6px 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
 
-        .info__etc__box{
-            display:flex;
-        }
+      .info__etc__box {
+        display: flex;
+      }
     }
   }
 `;

@@ -36,4 +36,24 @@ const shop_list = [
   },
 ];
 
-export {shop_list};
+const levelList = [
+  {level:1,icon:"🏵"},
+  {level:2,icon:"🥉"},
+  {level:3,icon:"🥈"},
+  {level:4,icon:"🏅 "},
+  {level:5,icon:"🐯 "},
+]
+
+
+const medalList = (level)=>{
+  let newMedal;
+  levelList.find(item=>{
+      if(item.level === level){
+        return newMedal=item.icon;
+      }
+      return null;
+  })
+  return newMedal
+}
+
+export {shop_list,medalList};
