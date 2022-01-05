@@ -15,7 +15,7 @@ function GameControl() {
 const Wrapper = styled.div`
   width: 800px;
   height: 600px;
-  background-color: orange;
+  background-color: #fff;
   position: relative;
   
 `;
