@@ -1,15 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import GameControl from "../components/GameControl";
-import GameMain from "../components/GameMain";
+import React from 'react';
+import styled from 'styled-components';
+import GameControl from '../components/GameControl';
+import GameMain from '../components/GameMain';
 
 function Game() {
   return (
     <Wrapper>
-
-          <GameMain />
-          <GameControl />
-
+      <GameMain />
+      <GameControl />
     </Wrapper>
   );
 }
