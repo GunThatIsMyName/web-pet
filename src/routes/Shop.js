@@ -25,7 +25,7 @@ function Shop() {
           filteredList.map((item) => {
             const {price, id, img} = item;
             return (
-              <div key={id}>
+              <div className="" key={id}>
                 <img src={img} alt={id} width="100" />
                 <h4> 💰 {price}</h4>
               </div>
