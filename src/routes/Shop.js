@@ -1,51 +1,54 @@
-import React, {useEffect} from 'react';
-import styled from 'styled-components';
-import {useGlobalContext} from '../context/AppContext';
-import {shop_list} from '../utils/helper';
+import React from "react";
+import styled from "styled-components";
+import { useGlobalContext } from "../context/AppContext";
+import { shop_list } from "../utils/helper";
 
 function Shop() {
-  const {getFilterData, filteredList, name, handleClick} = useGlobalContext();
+  const { list, index, handleClick, newName } = useGlobalContext();
 
   const handleBtn = () => {
-    window.confirm('이 제품을 구매하시겠습니까?');
+    window.confirm("이 제품을 구매하시겠습니까?");
   };
 
-  useEffect(() => {
-    getFilterData(name);
-    // eslint-disable-next-line
-  }, [name]);
+  if (!list[index]) {
+    return <h1>ERROR Components</h1>;
+  }
+
+  // ITEMS REFRESH  --------------------ITEMS REFRESH
+  const { items } = list[index];
 
   return (
     <Wrapper>
       <div>
         <div className="shop__btns">
-          {shop_list.map((item) => (
-            <button
-              className={name === item.name ? 'shop-btn active' : 'shop-btn'}
-              data-name={item.name}
-              onClick={handleClick}
-              key={item.id}
-            >
-              {item.title}
-            </button>
-          ))}
+          {shop_list.map((item) => {
+            const { name, id, title } = item;
+            return (
+              <button
+                className={
+                  newName === item.name ? "shop-btn active" : "shop-btn"
+                }
+                data-name={name}
+                onClick={handleClick}
+                key={id}
+              >
+                {title}
+              </button>
+            );
+          })}
         </div>
         <div className="shop__list">
-          {filteredList &&
-            filteredList.map((item) => {
-              const {price, id, img} = item;
+          {items &&
+            items.map((item) => {
+              const { price, id, img } = item;
               return (
                 <div className="filtered__list" key={id}>
-                  {img && (
-                    <>
-                      <div className="filtered__list-item">
-                        <img src={img} alt={id} />
-                        <h4> 💰 {price}0</h4>
-                      </div>
-                      <button>착용하기</button>
-                      <button onClick={handleBtn}>구매하기</button>
-                    </>
-                  )}
+                  <div className="filtered__list-item">
+                    <img src={img} alt={id} />
+                    <h4> 💰 {price}0</h4>
+                  </div>
+                  <button>착용하기</button>
+                  <button onClick={handleBtn}>구매하기</button>
                 </div>
               );
             })}
@@ -86,6 +89,7 @@ const Wrapper = styled.div`
 
     img {
       width: 130px;
+      height: 130px;
     }
     h4 {
       font-size: 1.6rem;

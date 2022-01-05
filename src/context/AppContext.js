@@ -1,15 +1,18 @@
-import {onSnapshot} from 'firebase/firestore';
-import React, {useContext, useEffect, useState} from 'react';
-import {petStoreRef} from '../firebase';
+import { onSnapshot } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { petStoreRef } from "../firebase";
 
 const AppContext = React.createContext();
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
   const [list, setList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [name, setName] = useState('hair');
+  const [index, setIndex] = useState(0);
+  const [newName,setName]=useState("hair");
   const handleClick = (e) => {
-    setName(e.target.dataset.name);
+    const { name } = e.target.dataset;
+    setName(name);
+    const newIndex = list.map((item) => item.type.indexOf(name));
+    setIndex(newIndex.indexOf(0));
   };
 
   const getData = () => {
@@ -17,25 +20,10 @@ const AppProvider = ({children}) => {
       onSnapshot(petStoreRef, (snapshot) => {
         let tempStore = [];
         snapshot.docs.map((item) => {
-          return tempStore.push({...item.data(), id: item.id});
+          return tempStore.push({ ...item.data(), id: item.id });
         });
         setList(tempStore);
       });
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const getFilterData = (name) => {
-    try {
-      const filteredData = list.find((item) => {
-        if (item.type === name) {
-          return item;
-        }
-        return null;
-      });
-      const filteredItem = filteredData && filteredData.items;
-      setFilteredList(filteredItem);
     } catch (error) {
       return error;
     }
@@ -50,10 +38,9 @@ const AppProvider = ({children}) => {
       value={{
         list,
         getData,
-        getFilterData,
         handleClick,
-        filteredList,
-        name,
+        index,
+        newName
       }}
     >
       {children}
