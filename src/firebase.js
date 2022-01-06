@@ -1,6 +1,6 @@
 import {initializeApp} from 'firebase/app';
 import {getFirestore, collection} from 'firebase/firestore';
-
+import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 const firebaseConfig = {
   apiKey: 'AIzaSyCfz6XNrtCzIi4cRaWwygI6jZUO5cQZdBE',
   authDomain: 'web-pet-94891.firebaseapp.com',
@@ -15,3 +15,5 @@ initializeApp(firebaseConfig);
 
 export const db = getFirestore();
 export const petStoreRef = collection(db, 'store');
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();

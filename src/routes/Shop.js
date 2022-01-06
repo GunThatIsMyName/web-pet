@@ -4,7 +4,7 @@ import {useGlobalContext} from '../context/AppContext';
 import {shop_list} from '../utils/helper';
 
 function Shop() {
-  const { list, index, handleClick, newName, handlePreview, previewList } =
+  const {list, index, handleClick, newName, handlePreview, previewList} =
     useGlobalContext();
 
   const handleBtn = () => {
@@ -50,11 +50,11 @@ function Shop() {
                   </div>
                   <button
                     className={`shop__preview__btn ${
-                      previewList[newName] === img ? "active-power" : null
+                      previewList[newName] === img ? 'active-power' : null
                     }`}
                     onClick={() => handlePreview(img)}
                   >
-                    {previewList[newName] === img ? "옷 벗기" : "착용하기"}
+                    {previewList[newName] === img ? '옷 벗기' : '착용하기'}
                   </button>
                   <button onClick={handleBtn}>구매하기</button>
                 </div>
