@@ -36,6 +36,11 @@ const Wrapper = styled.div`
       border-radius: 50%;
     }
   }
+
+  @media screen and (max-width: 1240px) {
+    width:500px;
+    height:300px;
+  }
 `;
 
 export default GameInfo;
