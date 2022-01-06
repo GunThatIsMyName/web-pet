@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import ControlList from "./ControlList";
+import ControlList from "../ControlList";
 
 function GameControl() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import GameControl from '../components/GameControl';
-import GameMain from '../components/GameMain';
+import GameControl from '../components/Game/GameControl';
+import GameMain from '../components/Game/GameMain';
 
 function Game() {
   return (

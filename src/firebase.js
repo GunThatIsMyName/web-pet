@@ -15,5 +15,6 @@ initializeApp(firebaseConfig);
 
 export const db = getFirestore();
 export const petStoreRef = collection(db, 'store');
+export const usersRef = collection(db, 'users');
 export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
