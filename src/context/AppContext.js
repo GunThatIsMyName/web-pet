@@ -4,10 +4,20 @@ import {petStoreRef} from '../firebase';
 
 const AppContext = React.createContext();
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
+  const imageList = {
+    hair: "",
+    cap: "",
+    tshirts: "",
+    bag: "",
+    acc: "",
+    glass: "",
+    ribon: "",
+  };
   const [list, setList] = useState([]);
   const [index, setIndex] = useState(0);
-  const [newName, setName] = useState('hair');
+  const [newName, setName] = useState("hair");
+  const [previewList, setPreviewList] = useState(imageList);
 
   const handleClick = (e) => {
     const {name} = e.target.dataset;
@@ -30,6 +40,15 @@ const AppProvider = ({children}) => {
     }
   };
 
+  const handlePreview = (data) => {
+    setPreviewList((prev) => {
+      if (prev[newName] === data) {
+        return { ...prev, [newName]: "" };
+      }
+      return { ...prev, [newName]: data };
+    });
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -42,6 +61,8 @@ const AppProvider = ({children}) => {
         handleClick,
         index,
         newName,
+        handlePreview,
+        previewList,
       }}
     >
       {children}
