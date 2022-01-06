@@ -1,4 +1,5 @@
 import {
+  LOAD_USER_DATA,
   LOGIN_AUTH,
   LOGOUT_AUTH,
   OFF_LOADING,
@@ -17,6 +18,7 @@ export const UserinitialState = {
     text: '',
   },
   loading: true,
+  loadUser:""
 };
 
 const UserReducer = (state, action) => {
@@ -54,6 +56,8 @@ const UserReducer = (state, action) => {
         user: {...state.user, name: '', photo: ''},
       };
 
+    case LOAD_USER_DATA:
+      return{...state,loadUser:action.payload}
     default:
       throw new Error(`not matched any ${action.type}`);
   }

@@ -4,7 +4,6 @@ import styled from "styled-components";
 const list = [
   { id: 1, name: "health", icon: "❤️", width: 80 },
   { id: 2, name: "happy", icon: "⭐️", width: 70 },
-  { id: 3, name: "experience", icon: " 💠", width: 40 },
 ];
 
 function GamePanel() {

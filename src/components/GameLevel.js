@@ -1,25 +1,27 @@
 import React from "react";
 import styled from "styled-components";
+import { useUserContext } from "../context/UserContext";
 import { medalList } from "../utils/helper";
 
-const list = [
-  { id: 1, icon: "💰", number: 21, color: "yellow" },
-  { id: 2, icon: "❤️", number: 2, color: "red" },
-];
-
 function GameLevel() {
+  const { loadUser } = useUserContext();
+
+  if (!loadUser) {
+    return null;
+  }
+
+  const {
+    userInfo: { level, money },
+  } = loadUser;
   return (
     <Wrapper className="level">
-      <h1> {medalList(1)} LEVEL 1 </h1>
+      <h1>
+        {medalList(level)} LEVEL {level}{" "}
+      </h1>
       <div className="items">
-        {list.map((item) => {
-          const { id, icon, number, color } = item;
-          return (
-            <li key={id}>
-              {icon} <span style={{ color: color }}>{number}</span>
-            </li>
-          );
-        })}
+        <li>
+          💰 <span style={{ color: "yellow" }}>{money}</span>
+        </li>
       </div>
     </Wrapper>
   );
