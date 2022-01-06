@@ -130,5 +130,21 @@ const Wrapper = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     overflow-y: auto;
   }
+
+  @media screen and (max-width: 1240px) {
+    .shop-btn{
+      margin: 5px;
+    }
+    .shop__list{
+      grid-template-columns:repeat(4,1fr);
+    }
+    .filtered__list {
+      margin:0.5rem 10px;
+      img{
+        width:100px;
+        height:100px;
+      }
+    }
+  }
 `;
 export default Shop;

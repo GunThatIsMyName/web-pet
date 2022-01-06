@@ -47,6 +47,11 @@ const Wrapper = styled.div`
       height: 100%;
     }
   }
+
+  @media screen and (max-width: 1240px) {
+    width:300px;
+    height:300px;
+  }
 `;
 
 export default GamePet;

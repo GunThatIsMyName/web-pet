@@ -13,8 +13,11 @@ function GameMain() {
 }
 
 const Wrapper = styled.div`
-  height:100%;
-
+  @media screen and (max-width: 1240px) {
+    display: flex;
+    justify-content:center;
+    width:100%;
+  }
 `;
 
 export default GameMain;

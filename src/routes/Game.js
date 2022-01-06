@@ -13,15 +13,15 @@ function Game() {
 }
 
 const Wrapper = styled.section`
-  background: teal;
   min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  @media screen and (max-width: 991px) {
-    flex-direction: column;
-    gap: 0;
+  @media screen and (max-width: 1240px) {
+    display:grid;
+    gap:0;
+    align-items:flex-end;
   }
 `;
 

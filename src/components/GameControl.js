@@ -15,6 +15,7 @@ function GameControl() {
 }
 
 const Wrapper = styled.div`
+  margin:0 2rem;
   .game__control {
     width: 800px;
     height: 600px;
@@ -22,6 +23,15 @@ const Wrapper = styled.div`
     overflow-y: auto;
     border-top-left-radius:10px;
     border-top-right-radius:10px;
+  }
+
+  @media screen and (max-width: 1240px) {
+    width:90%;
+    margin:auto;
+    .game__control {
+      width:100%;
+      height:40vh;
+    }
   }
 `;
 
