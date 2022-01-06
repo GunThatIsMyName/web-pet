@@ -126,6 +126,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: default;
 }
 
 code {
@@ -138,7 +139,6 @@ code {
 }
 
 a {
-  color: white;
   text-decoration: none;
 }
 button {
