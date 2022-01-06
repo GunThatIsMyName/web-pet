@@ -4,7 +4,8 @@ import { useGlobalContext } from "../context/AppContext";
 import { shop_list } from "../utils/helper";
 
 function Shop() {
-  const { list, index, handleClick, newName } = useGlobalContext();
+  const { list, index, handleClick, newName, handlePreview, previewList } =
+    useGlobalContext();
 
   const handleBtn = () => {
     window.confirm("이 제품을 구매하시겠습니까?");
@@ -47,7 +48,14 @@ function Shop() {
                     <img src={img} alt={id} />
                     <h4> 💰 {price}0</h4>
                   </div>
-                  <button>착용하기</button>
+                  <button
+                    className={`shop__preview__btn ${
+                      previewList[newName] === img ? "active-power" : null
+                    }`}
+                    onClick={() => handlePreview(img)}
+                  >
+                    {previewList[newName] === img ? "옷 벗기" : "착용하기"}
+                  </button>
                   <button onClick={handleBtn}>구매하기</button>
                 </div>
               );
@@ -79,6 +87,10 @@ const Wrapper = styled.div`
     background-color: black;
     color: white;
   }
+  .active-power {
+    background-color: lightgray;
+    color: white;
+  }
   .filtered__list {
     margin: 0.5rem 1.5rem;
     box-shadow: -1px 0px 9px -1px rgba(0, 0, 0, 0.75);
@@ -104,7 +116,7 @@ const Wrapper = styled.div`
       padding: 0.3rem 1.3rem;
       border: 1px solid black;
       border-radius: 5px;
-      transition: all 0.3s linear;
+      transition: all 0.2s linear;
       cursor: pointer;
       &:hover {
         background-color: black;
