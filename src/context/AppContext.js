@@ -1,15 +1,16 @@
-import { onSnapshot } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
-import { petStoreRef } from "../firebase";
+import {onSnapshot} from 'firebase/firestore';
+import React, {useContext, useEffect, useState} from 'react';
+import {petStoreRef} from '../firebase';
 
 const AppContext = React.createContext();
 
-const AppProvider = ({ children }) => {
+const AppProvider = ({children}) => {
   const [list, setList] = useState([]);
   const [index, setIndex] = useState(0);
-  const [newName,setName]=useState("hair");
+  const [newName, setName] = useState('hair');
+
   const handleClick = (e) => {
-    const { name } = e.target.dataset;
+    const {name} = e.target.dataset;
     setName(name);
     const newIndex = list.map((item) => item.type.indexOf(name));
     setIndex(newIndex.indexOf(0));
@@ -20,7 +21,7 @@ const AppProvider = ({ children }) => {
       onSnapshot(petStoreRef, (snapshot) => {
         let tempStore = [];
         snapshot.docs.map((item) => {
-          return tempStore.push({ ...item.data(), id: item.id });
+          return tempStore.push({...item.data(), id: item.id});
         });
         setList(tempStore);
       });
@@ -40,7 +41,7 @@ const AppProvider = ({ children }) => {
         getData,
         handleClick,
         index,
-        newName
+        newName,
       }}
     >
       {children}
