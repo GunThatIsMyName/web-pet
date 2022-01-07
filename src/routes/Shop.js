@@ -9,14 +9,14 @@ function Shop() {
     useGlobalContext();
 
   const {handleBtn} = useUserContext();
-  const {loadUser:{boughtItem}} = useUserContext();
+  const {
+    loadUser: {boughtItem},
+  } = useUserContext();
 
-
-  console.log(boughtItem,"?");
-  
-  const handleBuy=({id,price})=>{
-    handleBtn(id,price,newName)
-  }
+  const handleBuy = (e, item) => {
+    const {id, price} = item;
+    handleBtn(id, price, newName);
+  };
 
   // if (!loadUser) return null;
 
@@ -62,7 +62,7 @@ function Shop() {
                 >
                   {previewList[newName] === img ? '옷 벗기' : '착용하기'}
                 </button>
-                <button onClick={()=>handleBuy(item)}>구매하기</button>
+                <button onClick={(e) => handleBuy(e, item)}>구매하기</button>
               </div>
             );
           })}
