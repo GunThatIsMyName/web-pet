@@ -128,7 +128,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   cursor: default;
   background-color: var(--color-main);
-  color: var(--color-white);
 }
 
 code {

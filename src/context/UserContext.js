@@ -6,6 +6,7 @@ import {auth, petStoreRef, provider, usersRef} from '../firebase';
 import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
 import {
+  BUY_ITEM,
   LOAD_USER_DATA,
   LOGIN_AUTH,
   LOGOUT_AUTH,
@@ -60,7 +61,6 @@ const UserProvider = ({children}) => {
       const {
         userInfo: {id},
       } = item.data();
-      console.log(item.id, 'check user ID!@');
       return (userId = id);
     });
     return userId;
@@ -68,12 +68,13 @@ const UserProvider = ({children}) => {
 
   const loginUser = async (user) => {
     const {displayName, uid, photoURL} = user;
+
     const userInitData = {
       userInfo: {
         name: displayName,
         id: uid,
         photo: photoURL,
-        money: 10,
+        money: 100,
         level: 1,
       },
       userClothes: {
@@ -85,7 +86,7 @@ const UserProvider = ({children}) => {
         ribon: '',
         tshirts: '',
       },
-      boughtItem: [{type: '', items: [{id: '', price: '', img: ''}]}],
+      boughtItem: [],
     };
     await addDoc(usersRef, userInitData);
 
@@ -114,13 +115,16 @@ const UserProvider = ({children}) => {
     });
   };
 
-  const handleBtn = (price) => {
+  const handleBtn = (id,price,newName) => {
     const productPrice = Number(price * 10);
     const userMoney = Number(state.loadUser.userInfo.money);
+
     if (productPrice <= userMoney) {
       window.confirm('이 제품을 구매하시겠습니까?');
+
       const restPrice = userMoney - productPrice;
-      console.log(restPrice, 'rest price');
+
+      dispatch({type:BUY_ITEM,payload:{id,restPrice,newName}})
     } else {
       window.confirm('돈이 부족합니다. 밥을 먹이러 가시겠습니까?');
     }

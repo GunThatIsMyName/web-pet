@@ -1,45 +1,46 @@
 import {
+  BUY_ITEM,
   LOAD_USER_DATA,
   LOGIN_AUTH,
   LOGOUT_AUTH,
   OFF_LOADING,
   SET_ERROR,
   SET_LOADING,
-} from '../utils/action';
+} from "../utils/action";
 
 export const UserinitialState = {
   user: {
-    name: '',
-    photo: '',
-    id: '',
+    name: "",
+    photo: "",
+    id: "",
   },
   error: {
     state: false,
-    text: '',
+    text: "",
   },
   loading: true,
-  loadUser: '',
+  loadUser: "",
 };
 
 const UserReducer = (state, action) => {
   switch (action.type) {
     case SET_LOADING:
-      return {...state, loading: true};
+      return { ...state, loading: true };
 
     case OFF_LOADING:
-      return {...state, loading: false};
+      return { ...state, loading: false };
 
     case SET_ERROR:
-      return {...state, error: {state: true, text: action.payload}};
+      return { ...state, error: { state: true, text: action.payload } };
 
     case LOGIN_AUTH:
-      const {displayName, photoURL, uid} = action.payload;
+      const { displayName, photoURL, uid } = action.payload;
       return {
         ...state,
         loading: false,
         error: {
           state: false,
-          text: '',
+          text: "",
         },
         user: {
           ...state.user,
@@ -53,12 +54,26 @@ const UserReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        user: {...state.user, name: '', photo: ''},
+        user: { ...state.user, name: "", photo: "" },
       };
 
     case LOAD_USER_DATA:
-      return {...state, loadUser: action.payload};
+      return { ...state, loadUser: action.payload };
 
+    case BUY_ITEM:
+      const { restPrice, id, newName } = action.payload;
+
+      const newBought = [...state.loadUser.boughtItem];
+      newBought.push({type:newName,itemId:id});
+      
+      return {
+        ...state,
+        loadUser: {
+          ...state.loadUser,
+          userInfo: { ...state.loadUser.userInfo, money: restPrice },
+          boughtItem:newBought
+        },
+      };
     default:
       throw new Error(`not matched any ${action.type}`);
   }
