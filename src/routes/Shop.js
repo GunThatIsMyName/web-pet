@@ -11,7 +11,11 @@ function Shop() {
   const {handleBtn} = useUserContext();
   const {loadUser} = useUserContext();
 
-  if (!loadUser) return null;
+  const handleBuy=({id,price})=>{
+    handleBtn(id,price,newName)
+  }
+
+  // if (!loadUser) return null;
 
   if (!list[index]) {
     return null;
@@ -55,7 +59,7 @@ function Shop() {
                 >
                   {previewList[newName] === img ? '옷 벗기' : '착용하기'}
                 </button>
-                <button onClick={() => handleBtn(price)}>구매하기</button>
+                <button onClick={()=>handleBuy(item)}>구매하기</button>
               </div>
             );
           })}

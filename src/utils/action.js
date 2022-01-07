@@ -6,3 +6,4 @@ export const LOGIN_AUTH = 'login_auth';
 export const LOGOUT_AUTH = 'logout_auth';
 
 export const LOAD_USER_DATA="Load_userdata"
+export const BUY_ITEM="buy_Item";
