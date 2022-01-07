@@ -1,12 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import FilteredList from "../components/FilteredList";
-import { useGlobalContext } from "../context/AppContext";
-import { useUserContext } from "../context/UserContext";
-import { shop_list } from "../utils/helper";
+import React from 'react';
+import styled from 'styled-components';
+import FilteredList from '../components/FilteredList';
+import {useGlobalContext} from '../context/AppContext';
+import {useUserContext} from '../context/UserContext';
+import {shop_list} from '../utils/helper';
 
 function Shop() {
-  const { list, index, handleClick, newName } = useGlobalContext();
+  const {list, index, handleClick, newName} = useGlobalContext();
+  const {handleBtn} = useUserContext();
+  const {
+    loadUser: {boughtItem},
+  } = useUserContext();
+
+  const handleBuy = (e, item) => {
+    const {id, price} = item;
+    handleBtn(id, price, newName);
+  };
 
   // if (!loadUser) return null;
 
@@ -15,16 +24,16 @@ function Shop() {
   }
 
   // ITEMS REFRESH  --------------------ITEMS REFRESH
-  const { items } = list[index];
+  const {items} = list[index];
 
   return (
     <Wrapper>
       <div className="shop__btns">
         {shop_list.map((item) => {
-          const { name, id, title } = item;
+          const {name, id, title} = item;
           return (
             <button
-              className={newName === item.name ? "shop-btn active" : "shop-btn"}
+              className={newName === item.name ? 'shop-btn active' : 'shop-btn'}
               data-name={name}
               onClick={handleClick}
               key={id}
@@ -37,6 +46,7 @@ function Shop() {
       <div className="shop__list">
         {items &&
           items.map((item) => {
+            const {price, id, img} = item;
             return <FilteredList key={item.id} item={item} />;
           })}
       </div>
