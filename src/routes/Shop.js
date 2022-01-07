@@ -1,65 +1,65 @@
-import React from "react";
-import styled from "styled-components";
-import { useGlobalContext } from "../context/AppContext";
-import { shop_list } from "../utils/helper";
+import React from 'react';
+import styled from 'styled-components';
+import {useGlobalContext} from '../context/AppContext';
+import {useUserContext} from '../context/UserContext';
+import {shop_list} from '../utils/helper';
 
 function Shop() {
-  const { list, index, handleClick, newName, handlePreview, previewList } =
+  const {list, index, handleClick, newName, handlePreview, previewList} =
     useGlobalContext();
 
-  const handleBtn = () => {
-    window.confirm("이 제품을 구매하시겠습니까?");
-  };
+  const {handleBtn} = useUserContext();
+  const {loadUser} = useUserContext();
+
+  if (!loadUser) return null;
 
   if (!list[index]) {
     return null;
   }
 
   // ITEMS REFRESH  --------------------ITEMS REFRESH
-  const { items } = list[index];
+  const {items} = list[index];
 
   return (
     <Wrapper>
-        <div className="shop__btns">
-          {shop_list.map((item) => {
-            const { name, id, title } = item;
+      <div className="shop__btns">
+        {shop_list.map((item) => {
+          const {name, id, title} = item;
+          return (
+            <button
+              className={newName === item.name ? 'shop-btn active' : 'shop-btn'}
+              data-name={name}
+              onClick={handleClick}
+              key={id}
+            >
+              {title}
+            </button>
+          );
+        })}
+      </div>
+      <div className="shop__list">
+        {items &&
+          items.map((item) => {
+            const {price, id, img} = item;
             return (
-              <button
-                className={
-                  newName === item.name ? "shop-btn active" : "shop-btn"
-                }
-                data-name={name}
-                onClick={handleClick}
-                key={id}
-              >
-                {title}
-              </button>
+              <div className="filtered__list" key={id}>
+                <div className="filtered__list-item">
+                  <img src={img} alt={id} />
+                  <h4> 💰 {price}0</h4>
+                </div>
+                <button
+                  className={`shop__preview__btn ${
+                    previewList[newName] === img ? 'active-power' : null
+                  }`}
+                  onClick={() => handlePreview(img)}
+                >
+                  {previewList[newName] === img ? '옷 벗기' : '착용하기'}
+                </button>
+                <button onClick={() => handleBtn(price)}>구매하기</button>
+              </div>
             );
           })}
-        </div>
-        <div className="shop__list">
-          {items &&
-            items.map((item) => {
-              const { price, id, img } = item;
-              return (
-                <div className="filtered__list" key={id}>
-                  <div className="filtered__list-item">
-                    <img src={img} alt={id} />
-                    <h4> 💰 {price}0</h4>
-                  </div>
-                  <button
-                    className={`shop__preview__btn ${
-                      previewList[newName] === img ? "active-power" : null
-                    }`}
-                    onClick={() => handlePreview(img)}
-                  >
-                    {previewList[newName] === img ? "옷 벗기" : "착용하기"}
-                  </button>
-                  <button onClick={handleBtn}>구매하기</button>
-                </div>
-              );
-            })}
-        </div>
+      </div>
     </Wrapper>
   );
 }
