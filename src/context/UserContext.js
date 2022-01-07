@@ -1,8 +1,9 @@
+import React, { useContext, useEffect, useReducer } from "react";
+
 import { signInWithPopup } from "firebase/auth";
 import { addDoc, getDocs } from "firebase/firestore";
-import React, { useContext, useEffect, useReducer, useState } from "react";
-import { isCompositeComponentWithType } from "react-dom/cjs/react-dom-test-utils.development";
-import { auth, petStoreRef, provider, usersRef } from "../firebase";
+import { auth, provider, usersRef } from "../firebase";
+
 import UserReducer, { UserinitialState } from "../reducer/UserReducer";
 
 import {
