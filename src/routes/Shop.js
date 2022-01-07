@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import FilteredList from '../components/FilteredList';
 import {useGlobalContext} from '../context/AppContext';
 import {useUserContext} from '../context/UserContext';
 import {shop_list} from '../utils/helper';
 
 function Shop() {
-  const {list, index, handleClick, newName, handlePreview, previewList} =
-    useGlobalContext();
-
+  const {list, index, handleClick, newName} = useGlobalContext();
   const {handleBtn} = useUserContext();
   const {
     loadUser: {boughtItem},
@@ -48,23 +47,7 @@ function Shop() {
         {items &&
           items.map((item) => {
             const {price, id, img} = item;
-            return (
-              <div className="filtered__list" key={id}>
-                <div className="filtered__list-item">
-                  <img src={img} alt={id} />
-                  <h4> 💰 {price}0</h4>
-                </div>
-                <button
-                  className={`shop__preview__btn ${
-                    previewList[newName] === img ? 'active-power' : null
-                  }`}
-                  onClick={() => handlePreview(img)}
-                >
-                  {previewList[newName] === img ? '옷 벗기' : '착용하기'}
-                </button>
-                <button onClick={(e) => handleBuy(e, item)}>구매하기</button>
-              </div>
-            );
+            return <FilteredList key={item.id} item={item} />;
           })}
       </div>
     </Wrapper>
@@ -95,41 +78,6 @@ const Wrapper = styled.div`
   .active-power {
     background-color: lightgray;
     color: white;
-  }
-  .filtered__list {
-    margin: 0.5rem 1.5rem;
-    box-shadow: -1px 0px 9px -1px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: -1px 0px 9px -1px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -1px 0px 9px -1px rgba(0, 0, 0, 0.75);
-    padding: 0.5rem 0.3rem;
-    border-radius: 10px;
-
-    img {
-      width: 130px;
-      height: 130px;
-    }
-    h4 {
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #222;
-    }
-    .filtered__list-item {
-      display: flex;
-    }
-    button {
-      font-size: 1rem;
-      font-weight: bold;
-      padding: 0.3rem 1.3rem;
-      border: 1px solid black;
-      border-radius: 5px;
-      transition: all 0.2s linear;
-      cursor: pointer;
-      &:hover {
-        background-color: black;
-        color: white;
-        transform: scale(0.97);
-      }
-    }
   }
   .shop__list {
     display: grid;

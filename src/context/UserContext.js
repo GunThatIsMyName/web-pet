@@ -86,7 +86,15 @@ const UserProvider = ({children}) => {
         ribon: '',
         tshirts: '',
       },
-      boughtItem: [{type: '', items: {id: ''}}],
+      boughtItem: {
+        hair: [],
+        cap: [],
+        bag: [],
+        acc: [],
+        glass: [],
+        ribon: [],
+        tshirts: [],
+      },
     };
     await addDoc(usersRef, userInitData);
 
@@ -118,13 +126,11 @@ const UserProvider = ({children}) => {
   const handleBtn = (id, price, newName) => {
     const productPrice = Number(price * 10);
     const userMoney = state.loadUser && Number(state.loadUser.userInfo.money);
-
     if (productPrice <= userMoney) {
-      window.confirm('이 제품을 구매하시겠습니까?');
-
+      const newItems = {...state.loadUser.boughtItem};
+      newItems[newName].push(id);
       const restPrice = userMoney - productPrice;
-
-      dispatch({type: BUY_ITEM, payload: {id, restPrice, newName}});
+      dispatch({type: BUY_ITEM, payload: {newItems, restPrice}});
     } else {
       window.confirm('돈이 부족합니다. 밥을 먹이러 가시겠습니까?');
     }

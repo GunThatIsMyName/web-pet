@@ -61,17 +61,14 @@ const UserReducer = (state, action) => {
       return {...state, loadUser: action.payload};
 
     case BUY_ITEM:
-      const {restPrice, id, newName} = action.payload;
-
-      const newBought = {...state.loadUser.boughtItem};
-      console.log(newBought, 'new bought');
+      const {restPrice, newItems} = action.payload;
 
       return {
         ...state,
         loadUser: {
           ...state.loadUser,
           userInfo: {...state.loadUser.userInfo, money: restPrice},
-          boughtItem: newBought,
+          boughtItem: newItems,
         },
       };
     default:
