@@ -62,8 +62,10 @@ const UserReducer = (state, action) => {
 
     case BUY_ITEM:
       const { restPrice, id, newName } = action.payload;
+
       const newBought = [...state.loadUser.boughtItem];
       newBought.push({type:newName,itemId:id});
+      
       return {
         ...state,
         loadUser: {

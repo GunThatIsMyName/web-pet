@@ -9,8 +9,11 @@ function Shop() {
     useGlobalContext();
 
   const {handleBtn} = useUserContext();
-  const {loadUser} = useUserContext();
+  const {loadUser:{boughtItem}} = useUserContext();
 
+
+  console.log(boughtItem,"?");
+  
   const handleBuy=({id,price})=>{
     handleBtn(id,price,newName)
   }
