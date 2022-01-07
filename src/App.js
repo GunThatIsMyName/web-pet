@@ -22,11 +22,11 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-              <Route path="/game" element={isLoggedIn ? <Game /> : <Login /> }>
-                <Route path="" element={isLoggedIn ? <Control /> : <Login /> } />
-                <Route path="shop" element={isLoggedIn ? <Shop /> : <Login /> } />
-              </Route>
-              <Route path="/show" element={isLoggedIn ? <Show /> : <Login /> } />
+          <Route path="/game" element={isLoggedIn ? <Game /> : <Login />}>
+            <Route path="" element={isLoggedIn ? <Control /> : <Login />} />
+            <Route path="shop" element={isLoggedIn ? <Shop /> : <Login />} />
+          </Route>
+          <Route path="/show" element={isLoggedIn ? <Show /> : <Login />} />
         </Routes>
       </BrowserRouter>
     </div>
