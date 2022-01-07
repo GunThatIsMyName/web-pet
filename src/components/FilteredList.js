@@ -5,21 +5,18 @@ import { useUserContext } from "../context/UserContext";
 
 function FilteredList({ item }) {
   const { newName, handlePreview, previewList } = useGlobalContext();
-  const { handleBtn,loadUser} = useUserContext();
+  const { handleBtn, loadUser } = useUserContext();
   const { id, img, price } = item;
 
-  
   const handleBuy = ({ id, price }) => {
-      console.log(id)
-      handleBtn(id, price, newName);
-    };
+    console.log(id);
+    handleBtn(id, price, newName);
+  };
 
-    if(!loadUser){
-        return null;
-    }
-
-    const list =loadUser.boughtItem[newName] 
-    console.log(list,"1")
+  if (!loadUser) {
+    return null;
+  }
+  const list = loadUser.boughtItem[newName];
   return (
     <Wrapper className="filtered__list" key={id}>
       <div className="filtered__list-item">
@@ -32,9 +29,11 @@ function FilteredList({ item }) {
         }`}
         onClick={() => handlePreview(img)}
       >
-        {previewList[newName] === img ? "옷 벗기" : "착용하기"}
+        {previewList[newName] === img ? "옷 벗기" : !list.includes(id)?"미리보기":"착용하기"}
       </button>
-      <button onClick={() => handleBuy(item)}>구매하기</button>
+      {!list.includes(id) && (
+        <button onClick={() => handleBuy(item)}>구매하기</button>
+      )}
     </Wrapper>
   );
 }
