@@ -18,7 +18,7 @@ export const UserinitialState = {
     text: '',
   },
   loading: true,
-  loadUser:""
+  loadUser: '',
 };
 
 const UserReducer = (state, action) => {
@@ -57,7 +57,8 @@ const UserReducer = (state, action) => {
       };
 
     case LOAD_USER_DATA:
-      return{...state,loadUser:action.payload}
+      return {...state, loadUser: action.payload};
+
     default:
       throw new Error(`not matched any ${action.type}`);
   }
