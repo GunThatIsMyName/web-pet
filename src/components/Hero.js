@@ -23,25 +23,24 @@ function Hero() {
         <div className="hero__image">
           <img className="hero__img" src={image} alt="aa" />
         </div>
-        
+
       </div>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
-  min-height: 80vh;
+  min-height: 90vh;
   background: var(--color-darkmain);
   display: grid;
   place-items: center;
-  color: white;
-
   .hero {
     max-width: 1200px;
     width: 90%;
     display: flex;
     gap: 2rem;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin:3rem 0;
     .hero__column {
       display: flex;
       flex-direction: column;
