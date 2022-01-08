@@ -18,6 +18,7 @@ const AppProvider = ({children}) => {
   const [index, setIndex] = useState(0);
   const [newName, setName] = useState('hair');
   const [previewList, setPreviewList] = useState(imageList);
+  const [isSidebarOpen, setSidebar] = useState(false);
 
   const handleClick = (e) => {
     const {name} = e.target.dataset;
@@ -49,6 +50,10 @@ const AppProvider = ({children}) => {
     });
   };
 
+  const handleSidebar = () => {
+    setSidebar((prev) => !prev);
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -63,6 +68,8 @@ const AppProvider = ({children}) => {
         newName,
         handlePreview,
         previewList,
+        isSidebarOpen,
+        handleSidebar,
       }}
     >
       {children}
