@@ -1,12 +1,10 @@
+import React, {useContext, useEffect, useReducer} from 'react';
 
-import React, { useContext, useEffect, useReducer } from "react";
+import {signInWithPopup} from 'firebase/auth';
+import {addDoc, getDocs} from 'firebase/firestore';
+import {auth, provider, usersRef} from '../firebase';
 
-import { signInWithPopup } from "firebase/auth";
-import { addDoc, getDocs } from "firebase/firestore";
-import { auth, provider, usersRef } from "../firebase";
-
-import UserReducer, { UserinitialState } from "../reducer/UserReducer";
-
+import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
 import {
   BUY_ITEM,

@@ -1,16 +1,17 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Navbar } from "./components";
-import Control from "./components/Control";
-import Loader from "./components/Loader";
-import Login from "./components/Login";
-import { useUserContext } from "./context/UserContext";
-import { Game, Home, Show } from "./routes";
-import Shop from "./routes/Shop";
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Navbar} from './components';
+import Control from './components/Control';
+import Loader from './components/Loader';
+import Login from './components/Login';
+import Sidebar from './components/Sidebar';
+import {useUserContext} from './context/UserContext';
+import {Game, Home, Show} from './routes';
+import Shop from './routes/Shop';
 
 const App = () => {
-  const { user, loading } = useUserContext();
-  const { name, photo, email } = user;
-  const isLoggedIn = name !== "" && photo !== "" && email !== "";
+  const {user, loading} = useUserContext();
+  const {name, photo, email} = user;
+  const isLoggedIn = name !== '' && photo !== '' && email !== '';
 
   if (loading) {
     return <Loader />;
@@ -20,6 +21,7 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/game" element={isLoggedIn ? <Game /> : <Login />}>
