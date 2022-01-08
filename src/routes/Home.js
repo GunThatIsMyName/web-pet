@@ -1,10 +1,10 @@
 import React from 'react';
-import {GameLife, Featured, Main} from '../components';
+import {Hero, Featured, Main} from '../components';
 
 function Home() {
   return (
     <div>
-      <GameLife />
+      <Hero />
       <Featured />
       <Main />
     </div>
