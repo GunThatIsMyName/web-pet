@@ -41,6 +41,7 @@ const Wrapper = styled.aside`
   transform: translateX(-100%);
   background-color: gold;
   transition: 0.3s linear;
+  z-index:999;
   &.active {
     transform: translateX(0);
   }

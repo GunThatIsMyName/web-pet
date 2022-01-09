@@ -2,21 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import FilteredList from '../components/FilteredList';
 import {useGlobalContext} from '../context/AppContext';
-import {useUserContext} from '../context/UserContext';
+import { useUserContext } from '../context/UserContext';
 import {shop_list} from '../utils/helper';
 
 function Shop() {
   const {list, index, handleClick, newName} = useGlobalContext();
-  const {handleBtn} = useUserContext();
-  const {
-    loadUser: {boughtItem},
-  } = useUserContext();
 
-  const handleBuy = (e, item) => {
-    const {id, price} = item;
-    handleBtn(id, price, newName);
-  };
+  const {loadUser}=useUserContext();
 
+
+
+  console.log(loadUser,"user")
   // if (!loadUser) return null;
 
   if (!list[index]) {
@@ -46,7 +42,6 @@ function Shop() {
       <div className="shop__list">
         {items &&
           items.map((item) => {
-            const {price, id, img} = item;
             return <FilteredList key={item.id} item={item} />;
           })}
       </div>

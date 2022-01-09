@@ -1,8 +1,8 @@
-import React, {useContext, useEffect, useReducer} from 'react';
+import React, {useContext, useEffect, useReducer, useState} from 'react';
 
 import {signInWithPopup} from 'firebase/auth';
-import {addDoc, getDocs} from 'firebase/firestore';
-import {auth, provider, usersRef} from '../firebase';
+import {addDoc, doc, getDocs, updateDoc} from 'firebase/firestore';
+import {auth, db, provider, usersRef} from '../firebase';
 
 import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
@@ -19,8 +19,11 @@ import {
 const UserContext = React.createContext();
 
 const UserProvider = ({children}) => {
+  const [tempUserDoc,setUserDoc]=useState("");
   const [state, dispatch] = useReducer(UserReducer, UserinitialState);
 
+
+  // LOGIN PART --------------------------------
   const loginAuth = async () => {
     const checkedUser = await checkUser();
     try {
@@ -62,6 +65,7 @@ const UserProvider = ({children}) => {
       const {
         userInfo: {id},
       } = item.data();
+      saveUserDocId(item.id);
       return (userId = id);
     });
     return userId;
@@ -77,6 +81,8 @@ const UserProvider = ({children}) => {
         photo: photoURL,
         money: 100,
         level: 1,
+        happy:0,
+        health:0,
       },
       userClothes: {
         hair: '',
@@ -102,6 +108,27 @@ const UserProvider = ({children}) => {
     dispatch({type: LOAD_USER_DATA, payload: userInitData});
   };
 
+  const stayLogin = () => {
+    auth.onAuthStateChanged((user) => {
+      if (user === null || user.displayName === '') {
+        dispatch({type: OFF_LOADING});
+      }
+      if (user) {
+        console.log(user,"user");
+        getSavedData(user.uid);
+        dispatch({type: LOGIN_AUTH, payload: user});
+      }
+    });
+  };
+
+
+  // login refresh -------------------------
+  const saveUserDocId=(id)=>{
+    setUserDoc(id)
+  }
+
+  // Logout part -----------------------------
+
   const logoutAuth = async () => {
     dispatch({type: SET_LOADING});
     try {
@@ -112,30 +139,39 @@ const UserProvider = ({children}) => {
     }
   };
 
-  const stayLogin = () => {
-    auth.onAuthStateChanged((user) => {
-      if (user === null || user.displayName === '') {
-        dispatch({type: OFF_LOADING});
-      }
-      if (user) {
-        getSavedData(user.uid);
-        dispatch({type: LOGIN_AUTH, payload: user});
-      }
-    });
-  };
 
+  const updateUserData=async(newItems,restPrice)=>{
+    console.log(newItems,restPrice,"@@");
+
+    const newUsersDoc = doc(db, "users", );
+
+    await updateDoc(usersRef,{
+
+    })
+  }
+
+  // handle Other ------------------------------------
   const handleBtn = (id, price, newName) => {
     const productPrice = Number(price * 10);
     const userMoney = state.loadUser && Number(state.loadUser.userInfo.money);
     if (productPrice <= userMoney) {
-      const newItems = {...state.loadUser.boughtItem};
-      newItems[newName].push(id);
-      const restPrice = userMoney - productPrice;
-      dispatch({type: BUY_ITEM, payload: {newItems, restPrice}});
+      const popup = window.confirm('아이템을 구매하시겠습니까?');
+      if(popup){
+        console.log(popup,"예스");
+        console.log(id,"id")
+        const newItems = {...state.loadUser.boughtItem};
+        newItems[newName].push(id);
+        const restPrice = userMoney - productPrice;
+        dispatch({type: BUY_ITEM, payload: {newItems, restPrice}});
+        // updateUserData(newItems,restPrice);
+      }
     } else {
       window.confirm('돈이 부족합니다. 밥을 먹이러 가시겠습니까?');
     }
   };
+
+
+  // Use Effect --------------------------------------------
 
   useEffect(() => {
     stayLogin();

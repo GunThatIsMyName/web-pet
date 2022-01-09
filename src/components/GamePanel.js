@@ -1,12 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { useUserContext } from "../context/UserContext";
 
-const list = [
-  { id: 1, name: "health", icon: "❤️", width: 80 },
-  { id: 2, name: "happy", icon: "⭐️", width: 70 },
-];
 
 function GamePanel() {
+  const {loadUser}=useUserContext();
+ 
+  if(!loadUser){
+    return null;
+  }
+
+  const {happy,health}=loadUser.userInfo;
+  const list = [
+    { id: 1, name: "health", icon: "❤️", width:health },
+    { id: 2, name: "happy", icon: "⭐️", width: happy },
+  ];
+
   return (
     <Wrapper>
       {list.map((item) => {
