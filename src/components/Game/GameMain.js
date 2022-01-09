@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import GameInfo from "../GameInfo";
-import GamePet from "../GamePet";
+import { GameInfo, GamePet } from "..";
 
 function GameMain() {
   return (
     <Wrapper>
-      <GameInfo />
+      <GameInfo  />
       <GamePet />
     </Wrapper>
   );

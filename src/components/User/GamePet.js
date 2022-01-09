@@ -1,24 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
-import basicImage from "../image/basic.png";
-import { useGlobalContext } from "../context/AppContext";
+import basicImage from "../../image/basic.png";
+import { useUserContext } from "../../context/UserContext";
 
 const image =
   "https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg";
 
 function GamePet() {
-  const {previewList}=useGlobalContext();
+  const { loadUser } = useUserContext();
 
-  const newList  = Object.keys(previewList);
+  if (!loadUser) {
+    return null;
+  }
+
+  const clothesList = Object.keys(loadUser.userClothes);
+  const realList = loadUser.userClothes;
 
   return (
     <Wrapper back={image}>
       <div className="game__main__box">
         <img src={basicImage} alt="basic-img" />
-        {newList.map((item,index)=>{
-          if(previewList[item]){
-            return <img key={index} src={previewList[item]} alt={item} />
+        {clothesList.map((item, index) => {
+          if (realList[item]) {
+            return <img key={index} src={realList[item]} alt={item} />;
           }
           return null;
         })}
@@ -49,8 +54,8 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 1240px) {
-    width:300px;
-    height:300px;
+    width: 300px;
+    height: 300px;
   }
 `;
 

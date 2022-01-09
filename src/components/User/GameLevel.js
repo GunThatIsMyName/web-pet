@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useUserContext } from "../context/UserContext";
-import { medalList } from "../utils/helper";
+import { useUserContext } from "../../context/UserContext";
+import { medalList } from "../../utils/helper";
 
 function GameLevel() {
   const { loadUser } = useUserContext();
