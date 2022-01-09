@@ -16,7 +16,9 @@ function FilteredList({ item }) {
   if (!loadUser) {
     return null;
   }
+
   const list = loadUser.boughtItem[newName];
+  
   return (
     <Wrapper className="filtered__list" key={id}>
       <div className="filtered__list-item">

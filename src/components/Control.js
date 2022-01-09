@@ -4,19 +4,26 @@ import { BsPlus } from "react-icons/bs";
 
 function Control() {
   const list = [
-    { id: 1, name: "밥 먹기", icon: <BsPlus /> },
-    { id: 2, name: "운동 하기", icon: <BsPlus /> },
-    { id: 3, name: "일 하기", icon: <BsPlus /> },
-    { id: 4, name: "휴식 하기", icon: <BsPlus /> },
+    { id: 1, name: "밥 먹기" },
+    { id: 2, name: "운동 하기" },
+    { id: 3, name: "일 하기" },
+    { id: 4, name: "휴식 하기" },
   ];
+
+  const handleClick = () => {
+    console.log("???");
+  };
+
   return (
     <Wrapper>
       {list.map((item) => {
-        const { id, name, icon } = item;
+        const { id, name } = item;
         return (
           <div className="control__item" key={id}>
             <h1>{name}</h1>
-            <button className="control__item__btn" >{icon}</button>
+            <button className="control__item__btn" onClick={handleClick}>
+              <BsPlus />
+            </button>
           </div>
         );
       })}
@@ -26,6 +33,7 @@ function Control() {
 const Wrapper = styled.article`
   width: 100%;
   height: 100%;
+  color: black;
   .control__item {
     height: 25%;
     display: grid;
@@ -42,8 +50,8 @@ const Wrapper = styled.article`
       color: var(--color-white);
       border-radius: 50%;
       cursor: pointer;
-      &:active{
-        transform:scale(0.91);
+      &:active {
+        transform: scale(0.91);
       }
     }
   }
