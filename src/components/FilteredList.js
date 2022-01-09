@@ -1,15 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { useGlobalContext } from "../context/AppContext";
-import { useUserContext } from "../context/UserContext";
+import React from 'react';
+import styled from 'styled-components';
+import {useGlobalContext} from '../context/AppContext';
+import {useUserContext} from '../context/UserContext';
 
-function FilteredList({ item }) {
-  const { newName, handlePreview, previewList } = useGlobalContext();
-  const { handleBtn, loadUser } = useUserContext();
-  const { id, img, price } = item;
+function FilteredList({item}) {
+  const {newName, handlePreview, previewList} = useGlobalContext();
+  const {handleBtn, loadUser} = useUserContext();
+  const {id, img, price} = item;
 
-  const handleBuy = ({ id, price }) => {
-    console.log(id);
+  const handleBuy = ({id, price}) => {
     handleBtn(id, price, newName);
   };
 
@@ -18,7 +17,7 @@ function FilteredList({ item }) {
   }
 
   const list = loadUser.boughtItem[newName];
-  
+
   return (
     <Wrapper className="filtered__list" key={id}>
       <div className="filtered__list-item">
@@ -27,11 +26,15 @@ function FilteredList({ item }) {
       </div>
       <button
         className={`shop__preview__btn ${
-          previewList[newName] === img ? "active-power" : null
+          previewList[newName] === img ? 'active-power' : null
         }`}
         onClick={() => handlePreview(img)}
       >
-        {previewList[newName] === img ? "옷 벗기" : !list.includes(id)?"미리보기":"착용하기"}
+        {previewList[newName] === img
+          ? '옷 벗기'
+          : !list.includes(id)
+          ? '미리보기'
+          : '착용하기'}
       </button>
       {!list.includes(id) && (
         <button onClick={() => handleBuy(item)}>구매하기</button>
