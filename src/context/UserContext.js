@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, {useContext, useEffect, useReducer, useState} from 'react';
 
-import { signInWithPopup } from "firebase/auth";
-import { addDoc, doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
-import { auth, db, provider, usersRef } from "../firebase";
+import {signInWithPopup} from 'firebase/auth';
+import {addDoc, doc, getDocs, onSnapshot, setDoc, updateDoc} from 'firebase/firestore';
+import {auth, db, errorRef, provider, usersRef} from '../firebase';
 
-import UserReducer, { UserinitialState } from "../reducer/UserReducer";
+import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
 import {
   BUY_ITEM,
@@ -15,19 +15,19 @@ import {
   OFF_LOADING,
   SET_ERROR,
   SET_LOADING,
-} from "../utils/action";
+} from '../utils/action';
 
 const UserContext = React.createContext();
 
-const UserProvider = ({ children }) => {
-  const [tempUserDoc, setUserDoc] = useState("");
+const UserProvider = ({children}) => {
+  const [tempUserDoc, setUserDoc] = useState('');
   const [state, dispatch] = useReducer(UserReducer, UserinitialState);
 
   // LOGIN PART --------------------------------
   const loginAuth = async () => {
     const checkedUser = await checkUser();
     try {
-      const { user } = await signInWithPopup(auth, provider);
+      const {user} = await signInWithPopup(auth, provider);
 
       // OLD USER-----------------------
       if (user.uid === checkedUser) {
@@ -38,10 +38,10 @@ const UserProvider = ({ children }) => {
       // NEW USER------------------------
       if (user) {
         loginUser(user);
-        dispatch({ type: LOGIN_AUTH, payload: user });
+        dispatch({type: LOGIN_AUTH, payload: user});
       }
     } catch (error) {
-      dispatch({ type: SET_ERROR, payload: error.message });
+      dispatch({type: SET_ERROR, payload: error.message});
     }
   };
 
@@ -49,7 +49,7 @@ const UserProvider = ({ children }) => {
     const user = await getDocs(usersRef);
     user.docs.map((item) => {
       const {
-        userInfo: { id },
+        userInfo: {id},
       } = item.data();
       const docId = item.id;
       setUserDoc(docId);
@@ -64,12 +64,13 @@ const UserProvider = ({ children }) => {
     });
   };
 
+  console.log(tempUserDoc, 'old doc id');
   const checkUser = async () => {
     let userId;
     const doc = await getDocs(usersRef);
     doc.docs.map((item) => {
       const {
-        userInfo: { id },
+        userInfo: {id},
       } = item.data();
 
       return (userId = id);
@@ -78,7 +79,7 @@ const UserProvider = ({ children }) => {
   };
 
   const loginUser = async (user) => {
-    const { displayName, uid, photoURL } = user;
+    const {displayName, uid, photoURL} = user;
 
     const userInitData = {
       userInfo: {
@@ -91,13 +92,13 @@ const UserProvider = ({ children }) => {
         health: 0,
       },
       userClothes: {
-        hair: "",
-        cap: "",
-        bag: "",
-        acc: "",
-        glass: "",
-        ribon: "",
-        tshirts: "",
+        hair: '',
+        cap: '',
+        bag: '',
+        acc: '',
+        glass: '',
+        ribon: '',
+        tshirts: '',
       },
       boughtItem: {
         hair: [],
@@ -109,34 +110,34 @@ const UserProvider = ({ children }) => {
         tshirts: [],
       },
     };
-    await addDoc(usersRef, userInitData, {});
-
-    dispatch({ type: LOAD_USER_DATA, payload: userInitData });
+    const newDoc = await addDoc(usersRef, userInitData);
+    setUserDoc(newDoc.id);
+    console.log(tempUserDoc, 'new doc id');
+    dispatch({type: LOAD_USER_DATA, payload: userInitData});
   };
 
-  
   // login refresh -------------------------
   const stayLogin = () => {
     auth.onAuthStateChanged((user) => {
-      if (user === null || user.displayName === "") {
-        dispatch({ type: OFF_LOADING });
+      if (user === null || user.displayName === '') {
+        dispatch({type: OFF_LOADING});
       }
       if (user) {
         getSavedData(user.uid);
-        dispatch({ type: LOGIN_AUTH, payload: user });
+        dispatch({type: LOGIN_AUTH, payload: user});
       }
     });
   };
-  
+
   // Logout part -----------------------------
 
   const logoutAuth = async () => {
-    dispatch({ type: SET_LOADING });
+    dispatch({type: SET_LOADING});
     try {
       await auth.signOut();
-      dispatch({ type: LOGOUT_AUTH });
+      dispatch({type: LOGOUT_AUTH});
     } catch (error) {
-      dispatch({ type: SET_ERROR, payload: error.message });
+      dispatch({type: SET_ERROR, payload: error.message});
     }
   };
 
@@ -144,43 +145,59 @@ const UserProvider = ({ children }) => {
 
   const updateUserData = async (newItems, restPrice) => {
     if (!tempUserDoc) return;
-    const newUsersDoc = doc(db, "users", tempUserDoc);
+    const newUsersDoc = doc(db, 'users', tempUserDoc);
     await updateDoc(newUsersDoc, {
       boughtItem: newItems,
-      userInfo:{
+      userInfo: {
         ...state.loadUser.userInfo,
-        money:restPrice
-      }
+        money: restPrice,
+      },
     });
   };
+  const handleError=async()=>{
+    const newRef = doc(db,"error","aaabbcc");
+    const userInitData = {
+      userInfo: {
+        money: 100,
+        level: 1,
+        happy: 0,
+        health: 0,
+      },
+    };
+    await setDoc(newRef,userInitData);
+  }
 
   // handle Other ------------------------------------
   const handleBtn = (id, price, newName) => {
     const productPrice = Number(price * 10);
     const userMoney = state.loadUser && Number(state.loadUser.userInfo.money);
     if (productPrice <= userMoney) {
-      const popup = window.confirm("아이템을 구매하시겠습니까?");
+      const popup = window.confirm('아이템을 구매하시겠습니까?');
       if (popup) {
-        const newItems = { ...state.loadUser.boughtItem };
+        const newItems = {...state.loadUser.boughtItem};
         newItems[newName].push(id);
         const restPrice = userMoney - productPrice;
-        dispatch({ type: BUY_ITEM, payload: { newItems, restPrice } });
+        dispatch({type: BUY_ITEM, payload: {newItems, restPrice}});
         updateUserData(newItems, restPrice);
       }
     } else {
-      window.confirm("돈이 부족합니다. 밥을 먹이러 가시겠습니까?");
+      window.confirm('돈이 부족합니다. 밥을 먹이러 가시겠습니까?');
     }
   };
 
   // Load User clothes data;
-const userDataSnapshot=()=>{
-  onSnapshot(usersRef,(snapshot)=>{
-    snapshot.docs.map(item=>{
-      const tempData=item.data();
-      return dispatch({type:LOAD_USER_CLOTHES,payload:tempData});
-    })
-  })
-}
+  const userDataSnapshot = () => {
+    if(tempUserDoc){
+      const singleRef = doc(usersRef, tempUserDoc);
+      onSnapshot(singleRef,(snapshot)=>{
+        snapshot.docs.map(item=>{
+          const tempData=item.data();
+          console.log(item.data(),"??")
+          return dispatch({type:LOAD_USER_CLOTHES,payload:tempData});
+        })
+      })
+    }
+  };
 
   // Use Effect --------------------------------------------
 
@@ -189,13 +206,13 @@ const userDataSnapshot=()=>{
     // eslint-disable-next-line
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     userDataSnapshot();
-  },[])
+  }, []);
 
   return (
     <UserContext.Provider
-      value={{ ...state, tempUserDoc, loginAuth, logoutAuth, handleBtn }}
+      value={{...state, handleError,tempUserDoc, loginAuth, logoutAuth, handleBtn}}
     >
       {children}
     </UserContext.Provider>
