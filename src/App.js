@@ -1,11 +1,8 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {Navbar} from './components';
-import Control from './components/Control';
-import Loader from './components/Loader';
-import Login from './components/Login';
-import Sidebar from './components/Sidebar';
 import {useUserContext} from './context/UserContext';
 import {Game, Home, Show} from './routes';
+
+import { Control, Loader, Login, Navbar, Sidebar } from './components';
 import Shop from './routes/Shop';
 
 const App = () => {

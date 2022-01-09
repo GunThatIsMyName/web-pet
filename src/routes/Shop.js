@@ -1,17 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilteredList from '../components/FilteredList';
+import { FilteredList } from '../components';
 import {useGlobalContext} from '../context/AppContext';
-import {useUserContext} from '../context/UserContext';
 import {shop_list} from '../utils/helper';
 
 function Shop() {
   const {list, index, handleClick, newName} = useGlobalContext();
-
-  const {tempUserDoc} = useUserContext();
-
-  // if (!loadUser) return null;
-
   if (!list[index]) {
     return null;
   }
@@ -21,7 +15,7 @@ function Shop() {
 
   return (
     <Wrapper>
-      <div className="shop__btns">
+      <div className="shop__btn__list">
         {shop_list.map((item) => {
           const {name, id, title} = item;
           return (
@@ -48,7 +42,6 @@ function Shop() {
 
 const Wrapper = styled.div`
   text-align: center;
-
   .shop-btn {
     padding: 0.3rem 1.3rem;
     border: 2px solid black;
@@ -67,10 +60,6 @@ const Wrapper = styled.div`
     background-color: black;
     color: white;
   }
-  .active-power {
-    background-color: lightgray;
-    color: white;
-  }
   .shop__list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -83,13 +72,6 @@ const Wrapper = styled.div`
     }
     .shop__list {
       grid-template-columns: repeat(4, 1fr);
-    }
-    .filtered__list {
-      margin: 0.5rem 10px;
-      img {
-        width: 100px;
-        height: 100px;
-      }
     }
   }
 `;

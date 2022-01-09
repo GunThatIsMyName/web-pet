@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { AboutItem } from "..";
 
-import image1 from "../image/T04.png";
-import image2 from "../image/T05.png";
-import image3 from "../image/T06.png";
-import AboutItem from "./AboutItem";
 
 function Featured() {
 

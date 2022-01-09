@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useUserContext } from "../context/UserContext";
-import GameLevel from "./GameLevel";
-import GamePanel from "./GamePanel";
+import { GameLevel, GamePanel } from "..";
+import { useUserContext } from "../../context/UserContext";
 
 function GameInfo() {
   const { user } = useUserContext();

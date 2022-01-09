@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import {useUserContext} from '../context/UserContext';
+import {useUserContext} from '../../context/UserContext';
 import {FaBars} from 'react-icons/fa';
-import {useGlobalContext} from '../context/AppContext';
+import {useGlobalContext} from '../../context/AppContext';
 
 function Navbar() {
   const {user, loginAuth, logoutAuth} = useUserContext();

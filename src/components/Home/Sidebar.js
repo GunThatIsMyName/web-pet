@@ -2,8 +2,8 @@ import React from 'react';
 import {FaTimes} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import {useGlobalContext} from '../context/AppContext';
-import {useUserContext} from '../context/UserContext';
+import {useGlobalContext} from '../../context/AppContext';
+import {useUserContext} from '../../context/UserContext';
 
 function Sidebar() {
   const {isSidebarOpen, handleSidebar} = useGlobalContext();
