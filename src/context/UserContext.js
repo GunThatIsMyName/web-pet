@@ -19,9 +19,8 @@ import {
 const UserContext = React.createContext();
 
 const UserProvider = ({children}) => {
-  const [tempUserDoc,setUserDoc]=useState("");
+  const [tempUserDoc, setUserDoc] = useState('');
   const [state, dispatch] = useReducer(UserReducer, UserinitialState);
-
 
   // LOGIN PART --------------------------------
   const loginAuth = async () => {
@@ -51,8 +50,14 @@ const UserProvider = ({children}) => {
       const {
         userInfo: {id},
       } = item.data();
+      const docId = item.id;
+      setUserDoc(docId);
       if (id === userId) {
-        return dispatch({type: LOAD_USER_DATA, payload: item.data()});
+        return dispatch({
+          type: LOAD_USER_DATA,
+          payload: item.data(),
+          id: docId,
+        });
       }
       return null;
     });
@@ -65,7 +70,7 @@ const UserProvider = ({children}) => {
       const {
         userInfo: {id},
       } = item.data();
-      saveUserDocId(item.id);
+
       return (userId = id);
     });
     return userId;
@@ -81,8 +86,8 @@ const UserProvider = ({children}) => {
         photo: photoURL,
         money: 100,
         level: 1,
-        happy:0,
-        health:0,
+        happy: 0,
+        health: 0,
       },
       userClothes: {
         hair: '',
@@ -103,7 +108,7 @@ const UserProvider = ({children}) => {
         tshirts: [],
       },
     };
-    await addDoc(usersRef, userInitData);
+    await addDoc(usersRef, userInitData, {});
 
     dispatch({type: LOAD_USER_DATA, payload: userInitData});
   };
@@ -114,18 +119,13 @@ const UserProvider = ({children}) => {
         dispatch({type: OFF_LOADING});
       }
       if (user) {
-        console.log(user,"user");
         getSavedData(user.uid);
         dispatch({type: LOGIN_AUTH, payload: user});
       }
     });
   };
 
-
   // login refresh -------------------------
-  const saveUserDocId=(id)=>{
-    setUserDoc(id)
-  }
 
   // Logout part -----------------------------
 
@@ -139,16 +139,20 @@ const UserProvider = ({children}) => {
     }
   };
 
-
-  const updateUserData=async(newItems,restPrice)=>{
-    console.log(newItems,restPrice,"@@");
-
-    const newUsersDoc = doc(db, "users", );
-
-    await updateDoc(usersRef,{
-
-    })
-  }
+  const updateUserData = async (newItems, restPrice) => {
+    if (!tempUserDoc) return;
+    const newUsersDoc = doc(db, 'users', tempUserDoc);
+    await updateDoc(newUsersDoc, {
+      ...state.loadUser,
+      boughtItem: newItems,
+      userInfo: {
+        ...state.loadUser.userInfo,
+        money: restPrice,
+        happy: 50,
+        health: 50,
+      },
+    });
+  };
 
   // handle Other ------------------------------------
   const handleBtn = (id, price, newName) => {
@@ -156,20 +160,17 @@ const UserProvider = ({children}) => {
     const userMoney = state.loadUser && Number(state.loadUser.userInfo.money);
     if (productPrice <= userMoney) {
       const popup = window.confirm('아이템을 구매하시겠습니까?');
-      if(popup){
-        console.log(popup,"예스");
-        console.log(id,"id")
+      if (popup) {
         const newItems = {...state.loadUser.boughtItem};
         newItems[newName].push(id);
         const restPrice = userMoney - productPrice;
         dispatch({type: BUY_ITEM, payload: {newItems, restPrice}});
-        // updateUserData(newItems,restPrice);
+        updateUserData(newItems, restPrice);
       }
     } else {
       window.confirm('돈이 부족합니다. 밥을 먹이러 가시겠습니까?');
     }
   };
-
 
   // Use Effect --------------------------------------------
 
@@ -178,7 +179,9 @@ const UserProvider = ({children}) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{...state, loginAuth, logoutAuth, handleBtn}}>
+    <UserContext.Provider
+      value={{...state, tempUserDoc, loginAuth, logoutAuth, handleBtn}}
+    >
       {children}
     </UserContext.Provider>
   );

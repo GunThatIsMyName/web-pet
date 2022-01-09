@@ -2,17 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import FilteredList from '../components/FilteredList';
 import {useGlobalContext} from '../context/AppContext';
-import { useUserContext } from '../context/UserContext';
+import {useUserContext} from '../context/UserContext';
 import {shop_list} from '../utils/helper';
 
 function Shop() {
   const {list, index, handleClick, newName} = useGlobalContext();
 
-  const {loadUser}=useUserContext();
+  const {tempUserDoc} = useUserContext();
 
-
-
-  console.log(loadUser,"user")
   // if (!loadUser) return null;
 
   if (!list[index]) {
