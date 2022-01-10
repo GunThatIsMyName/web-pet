@@ -17,8 +17,10 @@ const Wrapper = styled.div`
     justify-content: center;
     width: 100%;
   }
-  @media screen and(max-width:768px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
   }
 `;
 

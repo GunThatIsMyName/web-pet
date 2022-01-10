@@ -19,9 +19,9 @@ const Wrapper = styled.section`
   align-items: center;
   gap: 2rem;
   @media screen and (max-width: 1240px) {
-    display:grid;
-    gap:0;
-    align-items:flex-end;
+    display: grid;
+    gap: 0;
+    align-items: flex-end;
   }
 `;
 

@@ -66,6 +66,8 @@ const Wrapper = styled.div`
     width: 300px;
     height: 300px;
   }
+  @media screen and (max-width: 768px) {
+  }
 `;
 
 export default GamePet;
