@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import basicImage from "../../image/basic.png";
-import { useUserContext } from "../../context/UserContext";
+import basicImage from '../../image/basic.png';
+import {useUserContext} from '../../context/UserContext';
 
 const image =
-  "https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg";
+  'https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg';
 
 function GamePet() {
-  const { loadUser } = useUserContext();
+  const {loadUser} = useUserContext();
 
   if (!loadUser) {
     return null;
@@ -23,7 +23,14 @@ function GamePet() {
         <img src={basicImage} alt="basic-img" />
         {clothesList.map((item, index) => {
           if (realList[item]) {
-            return <img key={index} src={realList[item]} alt={item} />;
+            return (
+              <img
+                style={{zIndex: item === 'cap' && 'bag' && 'ribbon' ? 99 : 0}}
+                key={index}
+                src={realList[item]}
+                alt={item}
+              />
+            );
           }
           return null;
         })}
