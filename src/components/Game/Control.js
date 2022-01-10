@@ -67,5 +67,17 @@ const Wrapper = styled.article`
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    font-size:1rem;
+    .control__item{
+      h1{
+        font-size:1rem;
+      }
+      .control__item__btn{
+        font-size:1.5rem;
+      }
+    }
+  }
 `;
 export default Control;
