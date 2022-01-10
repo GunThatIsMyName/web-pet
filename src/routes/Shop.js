@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FilteredList } from '../components';
+import {FilteredList} from '../components';
 import {useGlobalContext} from '../context/AppContext';
 import {shop_list} from '../utils/helper';
 
@@ -56,10 +56,7 @@ const Wrapper = styled.div`
       color: white;
     }
   }
-  .active {
-    background-color: black;
-    color: white;
-  }
+
   .shop__list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
