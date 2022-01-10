@@ -27,7 +27,7 @@ function FilteredList({ item }) {
 
       {list.includes(id) && (
         <button
-          onClick={(e) => handleClothes(e, img, id, newName)}
+          onClick={(e) => handleClothes(e, img, newName)}
           className={`shop__preview__btn ${
             previewList[newName] === img ? "active-power" : null
           }`}

@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useReducer, useState} from 'react';
 
 import {signInWithPopup} from 'firebase/auth';
-import { doc, getDoc, getDocs, onSnapshot, setDoc, updateDoc} from 'firebase/firestore';
-import {auth, db,  provider, usersRef} from '../firebase';
+import { doc, getDoc,  onSnapshot, setDoc, updateDoc} from 'firebase/firestore';
+import {auth, db,  provider} from '../firebase';
 
 import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
@@ -29,16 +29,15 @@ const UserProvider = ({children}) => {
       const {user} = await signInWithPopup(auth, provider);
       const checkedUser = await checkUser(user.uid);
 
-      console.log(checkUser,"check user ????  ")
-
       // OLD USER-----------------------
       if (user.uid === checkedUser) {
-        console.log("OLD USER")
         return getSavedData(user.uid);
-      
-      }else if (user) {
-        console.log("NEW USER")
+      }
+
+      // NEW USER-----------------------
+      if (user) {
         loginUser(user);
+        setUserDoc(user.uid)
         return dispatch({type: LOGIN_AUTH, payload: user});
       }
     } catch (error) {
@@ -48,9 +47,9 @@ const UserProvider = ({children}) => {
 
   const getSavedData = async (userId) => {
     const newRef = doc(db,"users",userId);
-
     const user = await getDoc(newRef);
       if (user.id === userId) {
+        setUserDoc(userId);
         return dispatch({
           type: LOAD_USER_DATA,
           payload: user.data(),
@@ -61,8 +60,11 @@ const UserProvider = ({children}) => {
   const checkUser = async (id) => {
     const singleRef = doc(db,"users",id);
     const user = await getDoc(singleRef);
-    console.log(user,"#####")
-    return user.id;
+    if(user.data()){
+      return user.id;
+    }else{
+      return null;
+    }
   };
 
   const loginUser = async (user) => {
@@ -140,10 +142,12 @@ const UserProvider = ({children}) => {
       },
     });
   };
+
   // handle Other ------------------------------------
   const handleBtn = (id, price, newName) => {
     const productPrice = Number(price * 10);
     const userMoney = state.loadUser && Number(state.loadUser.userInfo.money);
+
     if (productPrice <= userMoney) {
       const popup = window.confirm('아이템을 구매하시겠습니까?');
       if (popup) {
@@ -160,16 +164,11 @@ const UserProvider = ({children}) => {
 
   // Load User clothes data;
   const userDataSnapshot = () => {
-    if(tempUserDoc){
-      const singleRef = doc(usersRef, tempUserDoc);
+      console.log(tempUserDoc,"3")
+      const singleRef = doc(db,"users", tempUserDoc);
       onSnapshot(singleRef,(snapshot)=>{
-        snapshot.docs.map(item=>{
-          const tempData=item.data();
-          console.log(item.data(),"??")
-          return dispatch({type:LOAD_USER_CLOTHES,payload:tempData});
-        })
+        return dispatch({type:LOAD_USER_CLOTHES,payload:snapshot.data()});
       })
-    }
   };
 
   // Use Effect --------------------------------------------
@@ -179,9 +178,13 @@ const UserProvider = ({children}) => {
     // eslint-disable-next-line
   }, []);
 
+  console.log(tempUserDoc,"tempUserDoc")
   useEffect(() => {
-    userDataSnapshot();
-  }, []);
+    if(tempUserDoc){
+      userDataSnapshot();
+    }
+    // eslint-disable-next-line
+  }, [tempUserDoc]);
 
   return (
     <UserContext.Provider
