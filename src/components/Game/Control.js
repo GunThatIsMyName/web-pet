@@ -40,7 +40,6 @@ function Control() {
           <div className="control__item" key={id}>
             <h1>{name}</h1>
             <button className="control__item__btn">
-              {' '}
               <BsPlus
                 data-type={type}
                 data-point={point}
@@ -85,6 +84,18 @@ const Wrapper = styled.article`
       }
       &:active {
         transform: scale(0.9);
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size:1rem;
+    .control__item{
+      h1{
+        font-size:1rem;
+      }
+      .control__item__btn{
+        font-size:1.5rem;
       }
     }
   }

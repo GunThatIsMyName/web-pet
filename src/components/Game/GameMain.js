@@ -1,15 +1,9 @@
-
 import React from "react";
+import { useUserContext } from "../../context/UserContext";
 import styled from "styled-components";
 import { GameInfo, GamePet } from "..";
-import { useUserContext } from "../../context/UserContext";
-import React from 'react';
-import styled from 'styled-components';
-import {GameInfo, GamePet} from '..';
-
 
 function GameMain() {
-
   const { loadUser } = useUserContext();
 
   if (!loadUser) {
@@ -21,20 +15,21 @@ function GameMain() {
 
   return (
     <Wrapper>
-
-      <GameInfo  />
+      <GameInfo />
       <GamePet ObjList={clothesList} dataList={realList} />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  @media screen and (max-width: 1240px) {
+gap:2rem;
+@media screen and (max-width: 1330px) {
+    margin-bottom:2rem;
     display: flex;
     justify-content: center;
     width: 100%;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 840px) {
     flex-direction: column;
     align-items: center;
     margin-top: 3rem;
