@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useReducer, useState} from 'react';
 
 import {signInWithPopup} from 'firebase/auth';
-import {addDoc, doc, getDocs, onSnapshot, setDoc, updateDoc} from 'firebase/firestore';
-import {auth, db, errorRef, provider, usersRef} from '../firebase';
+import { doc, getDoc, getDocs, onSnapshot, setDoc, updateDoc} from 'firebase/firestore';
+import {auth, db,  provider, usersRef} from '../firebase';
 
 import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
@@ -25,20 +25,21 @@ const UserProvider = ({children}) => {
 
   // LOGIN PART --------------------------------
   const loginAuth = async () => {
-    const checkedUser = await checkUser();
     try {
       const {user} = await signInWithPopup(auth, provider);
+      const checkedUser = await checkUser(user.uid);
+
+      console.log(checkUser,"check user ????  ")
 
       // OLD USER-----------------------
       if (user.uid === checkedUser) {
-        getSavedData(user.uid);
-        return;
-      }
-
-      // NEW USER------------------------
-      if (user) {
+        console.log("OLD USER")
+        return getSavedData(user.uid);
+      
+      }else if (user) {
+        console.log("NEW USER")
         loginUser(user);
-        dispatch({type: LOGIN_AUTH, payload: user});
+        return dispatch({type: LOGIN_AUTH, payload: user});
       }
     } catch (error) {
       dispatch({type: SET_ERROR, payload: error.message});
@@ -46,45 +47,30 @@ const UserProvider = ({children}) => {
   };
 
   const getSavedData = async (userId) => {
-    const user = await getDocs(usersRef);
-    user.docs.map((item) => {
-      const {
-        userInfo: {id},
-      } = item.data();
-      const docId = item.id;
-      setUserDoc(docId);
-      if (id === userId) {
+    const newRef = doc(db,"users",userId);
+
+    const user = await getDoc(newRef);
+      if (user.id === userId) {
         return dispatch({
           type: LOAD_USER_DATA,
-          payload: item.data(),
-          id: docId,
+          payload: user.data(),
         });
       }
-      return null;
-    });
   };
 
-  console.log(tempUserDoc, 'old doc id');
-  const checkUser = async () => {
-    let userId;
-    const doc = await getDocs(usersRef);
-    doc.docs.map((item) => {
-      const {
-        userInfo: {id},
-      } = item.data();
-
-      return (userId = id);
-    });
-    return userId;
+  const checkUser = async (id) => {
+    const singleRef = doc(db,"users",id);
+    const user = await getDoc(singleRef);
+    console.log(user,"#####")
+    return user.id;
   };
 
   const loginUser = async (user) => {
-    const {displayName, uid, photoURL} = user;
+    const {displayName,uid, photoURL} = user;
 
     const userInitData = {
       userInfo: {
         name: displayName,
-        id: uid,
         photo: photoURL,
         money: 100,
         level: 1,
@@ -110,9 +96,9 @@ const UserProvider = ({children}) => {
         tshirts: [],
       },
     };
-    const newDoc = await addDoc(usersRef, userInitData);
-    setUserDoc(newDoc.id);
-    console.log(tempUserDoc, 'new doc id');
+
+    const newRef = doc(db,"users",uid);
+    await setDoc(newRef, userInitData);
     dispatch({type: LOAD_USER_DATA, payload: userInitData});
   };
 
@@ -154,19 +140,6 @@ const UserProvider = ({children}) => {
       },
     });
   };
-  const handleError=async()=>{
-    const newRef = doc(db,"error","aaabbcc");
-    const userInitData = {
-      userInfo: {
-        money: 100,
-        level: 1,
-        happy: 0,
-        health: 0,
-      },
-    };
-    await setDoc(newRef,userInitData);
-  }
-
   // handle Other ------------------------------------
   const handleBtn = (id, price, newName) => {
     const productPrice = Number(price * 10);
@@ -212,7 +185,7 @@ const UserProvider = ({children}) => {
 
   return (
     <UserContext.Provider
-      value={{...state, handleError,tempUserDoc, loginAuth, logoutAuth, handleBtn}}
+      value={{...state, tempUserDoc, loginAuth, logoutAuth, handleBtn}}
     >
       {children}
     </UserContext.Provider>

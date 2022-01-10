@@ -5,7 +5,7 @@ import { useUserContext } from "../../context/UserContext";
 
 function FilteredList({ item }) {
   const { newName, previewList, handleClothes } = useGlobalContext();
-  const { handleBtn, loadUser ,handleError} = useUserContext();
+  const { handleBtn, loadUser} = useUserContext();
   const { id, img, price } = item;
 
   const handleBuy = ({ id, price }) => {
@@ -39,7 +39,6 @@ function FilteredList({ item }) {
       {!list.includes(id) && (
         <button onClick={() => handleBuy(item)}>구매하기</button>
       )}
-      <button onClick={handleError} >ㅁㅁㅁ</button>
     </Wrapper>
   );
 }
