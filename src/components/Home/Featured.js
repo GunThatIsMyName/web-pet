@@ -1,53 +1,67 @@
-import React from "react";
-import styled from "styled-components";
-import { AboutItem } from "..";
-
+import React from 'react';
+import styled from 'styled-components';
+import {AboutItem} from '..';
+import {FeaturedList} from '../../utils/helper';
 
 function Featured() {
+  return (
+    <Wrapper>
+      <div className="featured">
+        <h1 className="featured__title">Design Your Character Life 💫</h1>
 
-
-    const list = [
-      {id:1,image:"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" ,name:"Title",subTitle:"Subtitle something associated"},
-      {id:2,image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" ,name:"myself",subTitle:"I will be a good programmer"},
-      {id:3,image:"https://images.unsplash.com/photo-1603038185130-ca1d5134c96f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" ,name:"mine",subTitle:"I'm gonna make architecture applications"}
-    ]
-
-  return <Wrapper>
-    <div className="featured">
-      <h1 className="featured__title">Gamify Your Life</h1>
-
-      <div className="featured__box">
-      {list.map(item=>{
-        return(
-          <AboutItem key={item.id} {...item} />
-        )
-      })}
+        <div className="featured__box">
+          {FeaturedList.map((item) => {
+            return <AboutItem key={item.id} {...item} />;
+          })}
+        </div>
+        <h1>이렇게 당신의 캐릭터를 꾸미세요 🎁</h1>
       </div>
-    </div>
-  </Wrapper>;
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.section`
   min-height: 80vh;
-  background: var(--color-brightmain);
-  display:flex;
-  justify-content:center;
-  .featured{
-    max-width:1200px;
-    width:90%;
-    margin:auto;
-    margin-bottom:10rem;
-    .featured__title{
-      text-align:center;
-      font-size:2rem;
-      font-weight:bold;
-      margin:4rem 0;
+  background: var(--color-red);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  h1 {
+    margin-top: 8rem;
+    font-size: 3rem;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 0.3rem;
+    line-height: 4rem;
+  }
+  .featured {
+    max-width: 1200px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10rem;
+    .featured__title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 5rem 0;
+      color: white;
+      letter-spacing: 0.2rem;
     }
-    .featured__box{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:2rem;
+    .featured__box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .featured {
+      .featured__title {
+        font-size: 2.5rem;
+      }
+    }
+    h1 {
+      font-size: 2rem;
     }
   }
 `;

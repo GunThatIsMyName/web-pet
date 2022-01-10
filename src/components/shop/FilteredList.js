@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { useGlobalContext } from "../../context/AppContext";
-import { useUserContext } from "../../context/UserContext";
+import React from 'react';
+import styled from 'styled-components';
+import {useGlobalContext} from '../../context/AppContext';
+import {useUserContext} from '../../context/UserContext';
 
-function FilteredList({ item }) {
-  const { newName, previewList, handleClothes } = useGlobalContext();
-  const { handleBtn, loadUser} = useUserContext();
-  const { id, img, price } = item;
+function FilteredList({item}) {
+  const {newName, previewList, handleClothes} = useGlobalContext();
+  const {handleBtn, loadUser} = useUserContext();
+  const {id, img, price} = item;
 
-  const handleBuy = ({ id, price }) => {
+  const handleBuy = ({id, price}) => {
     handleBtn(id, price, newName);
   };
 
@@ -17,9 +17,13 @@ function FilteredList({ item }) {
   }
 
   const list = loadUser.boughtItem[newName];
+  const checkItem = previewList[newName] === img;
 
   return (
-    <Wrapper className="filtered__list" key={id}>
+    <Wrapper
+      className={`filtered__list ${checkItem ? 'active' : null}`}
+      key={id}
+    >
       <div className="filtered__list-item">
         <img src={img} alt={id} />
         <h4 className="filtered__list__title"> 💰 {price}0</h4>
@@ -28,11 +32,9 @@ function FilteredList({ item }) {
       {list.includes(id) && (
         <button
           onClick={(e) => handleClothes(e, img, newName)}
-          className={`shop__preview__btn ${
-            previewList[newName] === img ? "active-power" : null
-          }`}
+          className={`shop__preview__btn ${checkItem ? null : 'active-power'}`}
         >
-          {previewList[newName] === img ? "옷벗기" : "착용하기"}
+          {checkItem ? '옷벗기' : '착용하기'}
         </button>
       )}
 
@@ -50,6 +52,13 @@ const Wrapper = styled.div`
   -moz-box-shadow: -1px 0px 9px -1px rgba(0, 0, 0, 0.75);
   padding: 0.5rem 0.3rem;
   border-radius: 10px;
+  &.active {
+    background: var(--color-yellow);
+  }
+  .active-power {
+    background: black;
+    color: white;
+  }
   .filtered__list-item {
     display: flex;
     img {
@@ -62,10 +71,7 @@ const Wrapper = styled.div`
       color: #222;
     }
   }
-  .active-power {
-    background-color: lightgray;
-    color: white;
-  }
+
   button {
     font-size: 1rem;
     font-weight: bold;
@@ -81,13 +87,13 @@ const Wrapper = styled.div`
     }
   }
 
-  @media screen and (max-width:1240px){
-      margin: 0.5rem 10px;
-      img {
-        width: 100px;
-        height: 100px;
-      }
+  @media screen and (max-width: 1240px) {
+    margin: 0.5rem 10px;
+    img {
+      width: 100px;
+      height: 100px;
     }
+  }
 `;
 
 export default FilteredList;

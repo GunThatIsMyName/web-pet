@@ -1,32 +1,31 @@
 // Game Components
-import Control from "./Game/Control";
-import ControlList from "./Game/ControlList";
-import GameControl from "./Game/GameControl";
-import GameMain from "./Game/GameMain";
+import Control from './Game/Control';
+import ControlList from './Game/ControlList';
+import GameControl from './Game/GameControl';
+import GameMain from './Game/GameMain';
 
 // Home Components
 
-import AboutItem from "./Home/AboutItem";
-import Featured from "./Home/Featured";
-import Footer from "./Home/Footer";
-import Hero from "./Home/Hero";
-import Login from "./Home/Login";
-import Main from "./Home/Main";
-import Navbar from "./Home/Navbar";
-import Sidebar from "./Home/Sidebar";
+import AboutItem from './Home/AboutItem';
+import Featured from './Home/Featured';
+import Footer from './Home/Footer';
+import Hero from './Home/Hero';
+import Login from './Home/Login';
+import Navbar from './Home/Navbar';
+import Sidebar from './Home/Sidebar';
 
 // Shop Components
-import FilteredList from "./shop/FilteredList";
+import FilteredList from './shop/FilteredList';
 
 // User Components
-import GameInfo from "./User/GameInfo";
-import GameLevel from "./User/GameLevel";
-import GamePanel from "./User/GamePanel";
-import GamePet from "./User/GamePet";
+import GameInfo from './User/GameInfo';
+import GameLevel from './User/GameLevel';
+import GamePanel from './User/GamePanel';
+import GamePet from './User/GamePet';
 
 // Components
 
-import Loader from "./Loader";
+import Loader from './Loader';
 
 export {
   Control,
@@ -38,7 +37,6 @@ export {
   Footer,
   Hero,
   Login,
-  Main,
   Navbar,
   Sidebar,
   FilteredList,

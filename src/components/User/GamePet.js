@@ -1,23 +1,39 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
 
 import basicImage from "../../image/basic.png";
 
-const image =
-  "https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg";
+import basicImage from '../../image/basic.png';
+import {useUserContext} from '../../context/UserContext';
 
-function GamePet({ ObjList, dataList ,size}) {
+
+const image =
+  'https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg';
+
+function GamePet() {
+  const {loadUser} = useUserContext();
+
+  if (!loadUser) {
+    return null;
+  }
+
+  const clothesList = Object.keys(loadUser.userClothes);
+  const realList = loadUser.userClothes;
+
+
   return (
     <Wrapper size={size} back={image}>
       <div className="game__main__box">
         <img src={basicImage} alt="basic-img" />
-        {ObjList.map((item, index) => {
-          if (dataList[item]) {
+        {clothesList.map((item, index) => {
+          if (realList[item]) {
             return (
               <img
-                style={{ zIndex: item === "cap" && "bag" && "ribon" ? 99 : 0 }}
+                style={{zIndex: item === 'cap' && 'bag' && 'ribon' ? 99 : 0}}
                 key={index}
-                src={dataList[item]}
+                src={realList[item]}
+
                 alt={item}
               />
             );
@@ -39,10 +55,12 @@ const Wrapper = styled.div`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  border-radius: 10px;
   .game__main__box {
     position: relative;
     width: 50%;
     height: 50%;
+
     img {
       position: absolute;
       width: 100%;
@@ -53,6 +71,8 @@ const Wrapper = styled.div`
   @media screen and (max-width: 1240px) {
     width: ${props=>props.size?`${props.size *0.7}px`:`300px`};
   height: ${props=>props.size?`${props.size * 0.7}px`:`300px`};
+  }
+  @media screen and (max-width: 768px) {
   }
 `;
 

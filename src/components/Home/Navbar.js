@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import {useUserContext} from '../../context/UserContext';
 import {FaBars} from 'react-icons/fa';
 import {useGlobalContext} from '../../context/AppContext';
+import {home} from '../../utils/helper';
 
 function Navbar() {
-  const {user, loginAuth, logoutAuth} = useUserContext();
+  const {user, logoutAuth} = useUserContext();
   const {handleSidebar} = useGlobalContext();
   const {name, photo, email} = user;
   const isLoggedIn = name !== '' && photo !== '' && email !== '';
@@ -14,15 +15,17 @@ function Navbar() {
   return (
     <Wrapper>
       <div className="navbar__list">
-        <Link to="/">home</Link>
-        {!isLoggedIn && <button onClick={loginAuth}>Login</button>}
-        {isLoggedIn && (
-          <>
-            <Link to="/game">game</Link>
-            <Link to="/show">show</Link>
-            <button onClick={logoutAuth}>Logout</button>
-          </>
-        )}
+        <img className="navbar__list-img" src={home} alt="home_img" />
+        <div className="navbar__list-info">
+          <Link to="/">Home</Link>
+          {isLoggedIn && (
+            <>
+              <Link to="/game">Game</Link>
+              <Link to="/show">Characters</Link>
+              <button onClick={logoutAuth}>Logout</button>
+            </>
+          )}
+        </div>
       </div>
 
       <FaBars onClick={handleSidebar} className="navbar__icon" />
@@ -31,19 +34,32 @@ function Navbar() {
 }
 
 const Wrapper = styled.div`
-  background: gold;
+  background: var(--color-green);
   text-align: center;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  padding-left: 5rem;
   .navbar__list {
     margin: 1rem;
+    display: flex;
+    align-items: center;
     a,
     button {
-      color: black;
+      color: var(--color-white);
       font-size: 1.5rem;
       font-weight: bold;
       margin: 0 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 3px solid transparent;
       cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        transform: scale(0.95);
+      }
+    }
+    .navbar__list-img {
+      width: 60px;
+      height: 60px;
     }
   }
   .navbar__icon {
@@ -53,7 +69,9 @@ const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     justify-content: flex-end;
     .navbar__list {
-      display: none;
+      .navbar__list-info {
+        display: none;
+      }
     }
     .navbar__icon {
       display: block;
@@ -63,6 +81,9 @@ const Wrapper = styled.div`
       &:hover {
         transform: scale(1.1);
       }
+    }
+    .navbar__icon {
+      font-size: 1.3rem;
     }
   }
 `;
