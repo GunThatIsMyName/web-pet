@@ -4,35 +4,22 @@ import styled from 'styled-components';
 
 import basicImage from "../../image/basic.png";
 
-import basicImage from '../../image/basic.png';
-import {useUserContext} from '../../context/UserContext';
-
-
 const image =
   'https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg';
 
-function GamePet() {
-  const {loadUser} = useUserContext();
-
-  if (!loadUser) {
-    return null;
-  }
-
-  const clothesList = Object.keys(loadUser.userClothes);
-  const realList = loadUser.userClothes;
-
+function GamePet({ObjList,dataList,size}) {
 
   return (
     <Wrapper size={size} back={image}>
       <div className="game__main__box">
         <img src={basicImage} alt="basic-img" />
-        {clothesList.map((item, index) => {
-          if (realList[item]) {
+        {ObjList.map((item, index) => {
+          if (dataList[item]) {
             return (
               <img
                 style={{zIndex: item === 'cap' && 'bag' && 'ribon' ? 99 : 0}}
                 key={index}
-                src={realList[item]}
+                src={dataList[item]}
 
                 alt={item}
               />
