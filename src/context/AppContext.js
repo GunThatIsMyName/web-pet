@@ -60,10 +60,11 @@ const AppProvider = ({ children }) => {
 
   // Clothes on / Off ------------------------------
 
-  const handleClothes = (e, img, id, newName) => {
+  const handleClothes = (e, img, newName) => {
     const { textContent } = e.target;
-    handlePreview(img);
     if (textContent === "착용하기") {
+      console.log("착용")
+      handlePreview(img);
       onClothes(img, newName);
     } else {
       offClothes(newName);

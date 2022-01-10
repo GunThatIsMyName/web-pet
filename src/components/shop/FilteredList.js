@@ -5,7 +5,7 @@ import { useUserContext } from "../../context/UserContext";
 
 function FilteredList({ item }) {
   const { newName, previewList, handleClothes } = useGlobalContext();
-  const { handleBtn, loadUser } = useUserContext();
+  const { handleBtn, loadUser} = useUserContext();
   const { id, img, price } = item;
 
   const handleBuy = ({ id, price }) => {
@@ -32,7 +32,7 @@ function FilteredList({ item }) {
             previewList[newName] === img ? "active-power" : null
           }`}
         >
-          {loadUser.userClothes[newName] === img ? "옷벗기" : "착용하기"}
+          {previewList[newName] === img ? "옷벗기" : "착용하기"}
         </button>
       )}
 
