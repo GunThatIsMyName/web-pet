@@ -3,9 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import { GameInfo, GamePet } from "..";
 import { useUserContext } from "../../context/UserContext";
-import React from 'react';
-import styled from 'styled-components';
-import {GameInfo, GamePet} from '..';
 
 
 function GameMain() {
