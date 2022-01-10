@@ -37,29 +37,43 @@ const shop_list = [
 ];
 
 const levelList = [
-  {level:1,icon:"🏵"},
-  {level:2,icon:"🥉"},
-  {level:3,icon:"🥈"},
-  {level:4,icon:"🏅 "},
-  {level:5,icon:"🐯 "},
-  {level:6,icon:" 🥷🏼 "},
-  {level:7,icon:"🦹🏼‍♀️"},
-  {level:8,icon:"🧙🏼‍♀️"},
-  {level:9,icon:"🧝🏼‍♀️ "},
-  {level:10,icon:"🧛🏼‍♀️ "},
-]
-const medalList = (level)=>{
+  {level: 1, icon: '🏵'},
+  {level: 2, icon: '🥉'},
+  {level: 3, icon: '🥈'},
+  {level: 4, icon: '🏅 '},
+  {level: 5, icon: '🐯 '},
+  {level: 6, icon: ' 🥷🏼 '},
+  {level: 7, icon: '🦹🏼‍♀️'},
+  {level: 8, icon: '🧙🏼‍♀️'},
+  {level: 9, icon: '🧝🏼‍♀️ '},
+  {level: 10, icon: '🧛🏼‍♀️ '},
+];
+const medalList = (level) => {
   let newMedal;
-  levelList.find(item=>{
-      if(item.level === level){
-        return newMedal=item.icon;
-      }
-      return null;
-  })
-  return newMedal
-}
+  levelList.find((item) => {
+    if (item.level === level) {
+      return (newMedal = item.icon);
+    }
+    return null;
+  });
+  return newMedal;
+};
 
+const headerList = [
+  {
+    id: 1,
+    title: 'Game',
+    path: '/game',
+  },
+  {
+    id: 2,
+    title: 'Characters',
+    path: '/show',
+  },
+  {
+    id: 3,
+    title: 'Logout',
+  },
+];
 
-
-
-export {shop_list,medalList};
+export {shop_list, medalList, headerList};
