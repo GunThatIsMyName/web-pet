@@ -76,4 +76,54 @@ const headerList = [
   },
 ];
 
-export {shop_list, medalList, headerList};
+const FeaturedList = [
+  {
+    id: 1,
+    image: 'assets/basic.png',
+    name: 'basic-character',
+    subTitle: '기본 캐릭터 !',
+  },
+  {
+    id: 2,
+    image: 'assets/featured1.png',
+    name: 'Clothes',
+    subTitle: '돈모아서 옷을 고르고 ,',
+  },
+  {
+    id: 3,
+    image: 'assets/featured2.png',
+    name: 'Hair',
+    subTitle: '돈 또 모아서 머리를 고르고 ,',
+  },
+  {
+    id: 4,
+    image: 'assets/featured3.png',
+    name: 'Bag',
+    subTitle: '가방을 고르고 ,',
+  },
+  {
+    id: 5,
+    image: 'assets/featured4.png',
+    name: 'Acc',
+    subTitle: '악세사리를 고르고 ,',
+  },
+  {
+    id: 6,
+    image: 'assets/featured5.png',
+    name: 'Hat',
+    subTitle: '모자를 고르고 ,',
+  },
+  {
+    id: 7,
+    image: 'assets/featured6.png',
+    name: 'Glass',
+    subTitle: '영끌해서 안경을 고르고 ,',
+  },
+  {
+    id: 8,
+    image: 'assets/featured7.png',
+    name: 'Ribbon',
+    subTitle: '만렙찍어서 리본을 고르고 ,',
+  },
+];
+export {shop_list, medalList, headerList, FeaturedList};

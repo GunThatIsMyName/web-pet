@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {useUserContext} from './context/UserContext';
 import {Game, Home, Show} from './routes';
 
-import {Control, Loader, Login, Navbar, Sidebar} from './components';
+import {Control, Footer, Loader, Login, Navbar, Sidebar} from './components';
 import Shop from './routes/Shop';
 
 const App = () => {
@@ -27,6 +27,7 @@ const App = () => {
           </Route>
           <Route path="/show" element={isLoggedIn ? <Show /> : <Login />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
