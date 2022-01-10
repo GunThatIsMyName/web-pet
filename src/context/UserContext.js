@@ -165,15 +165,15 @@ const UserProvider = ({ children }) => {
 
   const updateStat = async (numberPoint, type) => {
     const newUsersDoc = doc(db, "users", tempUserDoc);
-    const { happy, health,level,money } = state.loadUser.userInfo;
+    const { happy, health, level, money } = state.loadUser.userInfo;
 
-    let statObj={happy,health}
-    let {happy:happyStat,health:healthStat}=statObj;
+    let statObj = { happy, health };
+    let { happy: happyStat, health: healthStat } = statObj;
 
     if (type === "happy") {
-      happyStat+= numberPoint;
+      happyStat += numberPoint;
     } else if (type === "health") {
-      healthStat+= numberPoint;
+      healthStat += numberPoint;
     }
 
     const levelUp = happyStat >= 100 && healthStat >= 100;
@@ -182,13 +182,12 @@ const UserProvider = ({ children }) => {
       return await updateDoc(newUsersDoc, {
         userInfo: {
           ...state.loadUser.userInfo,
-          level: level+1,
+          level: level + 1,
           happy: 0,
           health: 0,
-          money:money+30
+          money: money + 30,
         },
       });
-
     }
     await updateDoc(newUsersDoc, {
       userInfo: {
@@ -205,7 +204,7 @@ const UserProvider = ({ children }) => {
     const {
       userInfo: { happy, health },
     } = state.loadUser;
-   
+
     const numberPoint = parseInt(point);
     if (type === "health") {
       if (health >= 100) {
@@ -236,7 +235,6 @@ const UserProvider = ({ children }) => {
     stayLogin();
     // eslint-disable-next-line
   }, []);
-
 
   useEffect(() => {
     if (tempUserDoc) {
