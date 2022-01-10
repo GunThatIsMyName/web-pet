@@ -6,23 +6,12 @@ import { useUserContext } from "./UserContext";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const imageList = {
-    hair: "",
-    cap: "",
-    tshirts: "",
-    bag: "",
-    acc: "",
-    glass: "",
-    ribon: "",
-  };
   const [list, setList] = useState([]);
   const [index, setIndex] = useState(0);
   const [newName, setName] = useState("hair");
-
-  const [previewList, setPreviewList] = useState(imageList);
-
-  const [isSidebarOpen, setSidebar] = useState(false);
   const { tempUserDoc, loadUser } = useUserContext();
+  const [isSidebarOpen, setSidebar] = useState(false);
+  const [previewList, setPreviewList] = useState('');
 
   const handleClick = (e) => {
     const { name } = e.target.dataset;
@@ -30,7 +19,7 @@ const AppProvider = ({ children }) => {
     const newIndex = list.map((item) => item.type.indexOf(name));
     setIndex(newIndex.indexOf(0));
   };
-
+  
   const getData = () => {
     try {
       onSnapshot(petStoreRef, (snapshot) => {
@@ -45,15 +34,6 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const handlePreview = (data) => {
-    setPreviewList((prev) => {
-      if (prev[newName] === data) {
-        return { ...prev, [newName]: "" };
-      }
-      return { ...prev, [newName]: data };
-    });
-  };
-
   const handleSidebar = () => {
     setSidebar((prev) => !prev);
   };
@@ -62,43 +42,42 @@ const AppProvider = ({ children }) => {
 
   const handleClothes = (e, img, newName) => {
     const { textContent } = e.target;
-    if (textContent === "착용하기") {
-      console.log("착용")
-      handlePreview(img);
-      onClothes(img, newName);
-    } else {
-      offClothes(newName);
-    }
+    let tempList;
+
+    setPreviewList(item=>{
+      console.log(item,"item")
+      if (textContent === "옷벗기") {
+        if(item[newName]===img){
+          tempList={...item,[newName]:""}
+          controlClothes(tempList);
+          return {...item,[newName]:""}
+        }
+      }else{
+        tempList={...item,[newName]:img}
+        controlClothes(tempList);
+        return {...item,[newName]:img}
+      }
+    })
   };
 
-  const onClothes = async (img, newName) => {
-    if (!tempUserDoc) return;
+  const controlClothes = async (tempList) => {
     const newUsersDoc = doc(db, "users", tempUserDoc);
-
     await updateDoc(newUsersDoc, {
-      userClothes: {
-        ...loadUser.userClothes,
-        [newName]: img,
-      },
+      userClothes:tempList
     });
   };
 
-  const offClothes = async (newName) => {
-    if (!tempUserDoc) return;
-    const newUsersDoc = doc(db, "users", tempUserDoc);
-
-    await updateDoc(newUsersDoc, {
-      userClothes: {
-        ...loadUser.userClothes,
-        [newName]: "",
-      },
-    });
-  };
 
   useEffect(() => {
     getData();
   }, []);
 
+  useEffect(()=>{
+    if(loadUser){
+      setPreviewList(loadUser.userClothes)
+    }
+  },[loadUser])
+  
   return (
     <AppContext.Provider
       value={{
