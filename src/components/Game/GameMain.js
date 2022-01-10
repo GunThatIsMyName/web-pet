@@ -1,16 +1,10 @@
-
-import React from "react";
-import styled from "styled-components";
-import { GameInfo, GamePet } from "..";
-import { useUserContext } from "../../context/UserContext";
 import React from 'react';
+import {useUserContext} from '../../context/UserContext';
 import styled from 'styled-components';
 import {GameInfo, GamePet} from '..';
 
-
 function GameMain() {
-
-  const { loadUser } = useUserContext();
+  const {loadUser} = useUserContext();
 
   if (!loadUser) {
     return null;
@@ -21,8 +15,7 @@ function GameMain() {
 
   return (
     <Wrapper>
-
-      <GameInfo  />
+      <GameInfo />
       <GamePet ObjList={clothesList} dataList={realList} />
     </Wrapper>
   );

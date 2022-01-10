@@ -74,7 +74,7 @@ const UserProvider = ({children}) => {
       userInfo: {
         name: displayName,
         photo: photoURL,
-        money: 100,
+        money: 10,
         level: 1,
         happy: 0,
         health: 0,
@@ -163,7 +163,6 @@ const UserProvider = ({children}) => {
   };
 
   const updateStat = async (numberPoint, type) => {
-
     const newUsersDoc = doc(db, 'users', tempUserDoc);
     const {happy, health, level, money} = state.loadUser.userInfo;
 
