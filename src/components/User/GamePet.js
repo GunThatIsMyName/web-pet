@@ -25,7 +25,7 @@ function GamePet() {
           if (realList[item]) {
             return (
               <img
-                style={{zIndex: item === 'cap' && 'bag' && 'ribbon' ? 99 : 0}}
+                style={{zIndex: item === 'cap' && 'bag' && 'ribon' ? 99 : 0}}
                 key={index}
                 src={realList[item]}
                 alt={item}
