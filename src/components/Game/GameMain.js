@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useUserContext } from "../../context/UserContext";
 import styled from "styled-components";
@@ -5,6 +6,7 @@ import { GameInfo, GamePet } from "..";
 
 function GameMain() {
   const { loadUser } = useUserContext();
+
 
   if (!loadUser) {
     return null;
