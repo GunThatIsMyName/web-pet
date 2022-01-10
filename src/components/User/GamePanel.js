@@ -1,37 +1,36 @@
-import React from "react";
-import styled from "styled-components";
-import { useUserContext } from "../../context/UserContext";
-
+import React from 'react';
+import styled from 'styled-components';
+import {useUserContext} from '../../context/UserContext';
 
 function GamePanel() {
-  const {loadUser}=useUserContext();
- 
-  if(!loadUser){
+  const {loadUser} = useUserContext();
+
+  if (!loadUser) {
     return null;
   }
 
-  const {happy,health}=loadUser.userInfo;
+  const {happy, health} = loadUser.userInfo;
   const list = [
-    { id: 1, name: "health", icon: "❤️", width:health },
-    { id: 2, name: "happy", icon: "⭐️", width: happy },
+    {id: 1, name: 'health', icon: '❤️', width: health},
+    {id: 2, name: 'happy', icon: '⭐️', width: happy},
   ];
 
   return (
     <Wrapper>
       {list.map((item) => {
-        const { icon, name, id, width } = item;
+        const {icon, name, id, width} = item;
         return (
           <div key={id} className="info__item">
             {icon}
             <div className="info__box">
               <div className="info__bar">
                 <div
-                  style={{ width: `${width}%` }}
+                  style={{width: `${width}%`}}
                   className="info__progress"
                 ></div>
               </div>
               <div className="info__etc">
-                  <p>{width}/100</p>
+                <p>{width}/100</p>
                 <h1>{name}</h1>
               </div>
             </div>
@@ -44,6 +43,7 @@ function GamePanel() {
 
 const Wrapper = styled.div`
   padding: 1rem;
+  margin: 1rem;
   .info__item {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -59,7 +59,7 @@ const Wrapper = styled.div`
         width: 100%;
         height: 10px;
         border-radius: 3px;
-        background-color: #36215D;
+        background-color: var(--color-dark);
         position: relative;
         .info__progress {
           position: absolute;
@@ -72,7 +72,7 @@ const Wrapper = styled.div`
       }
     }
     .info__etc {
-      margin: 6px 0;
+      margin: 15px 0;
       width: 100%;
       display: flex;
       justify-content: space-between;

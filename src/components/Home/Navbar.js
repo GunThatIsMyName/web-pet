@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import {useUserContext} from '../../context/UserContext';
 import {FaBars} from 'react-icons/fa';
 import {useGlobalContext} from '../../context/AppContext';
-const home = 'assets/header.png';
+import {home} from '../../utils/helper';
+
 function Navbar() {
   const {user, logoutAuth} = useUserContext();
   const {handleSidebar} = useGlobalContext();
@@ -15,14 +16,16 @@ function Navbar() {
     <Wrapper>
       <div className="navbar__list">
         <img className="navbar__list-img" src={home} alt="home_img" />
-        <Link to="/">Home</Link>
-        {isLoggedIn && (
-          <>
-            <Link to="/game">Game</Link>
-            <Link to="/show">Characters</Link>
-            <button onClick={logoutAuth}>Logout</button>
-          </>
-        )}
+        <div className="navbar__list-info">
+          <Link to="/">Home</Link>
+          {isLoggedIn && (
+            <>
+              <Link to="/game">Game</Link>
+              <Link to="/show">Characters</Link>
+              <button onClick={logoutAuth}>Logout</button>
+            </>
+          )}
+        </div>
       </div>
 
       <FaBars onClick={handleSidebar} className="navbar__icon" />
@@ -34,6 +37,7 @@ const Wrapper = styled.div`
   background: var(--color-green);
   text-align: center;
   display: flex;
+  align-items: center;
   padding-left: 5rem;
   .navbar__list {
     margin: 1rem;
@@ -65,7 +69,9 @@ const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     justify-content: flex-end;
     .navbar__list {
-      display: none;
+      .navbar__list-info {
+        display: none;
+      }
     }
     .navbar__icon {
       display: block;

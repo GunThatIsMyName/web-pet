@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {useGlobalContext} from '../../context/AppContext';
 import {useUserContext} from '../../context/UserContext';
+import {home} from '../../utils/helper';
 
 function Sidebar() {
   const {isSidebarOpen, handleSidebar} = useGlobalContext();
@@ -14,6 +15,7 @@ function Sidebar() {
   return (
     <Wrapper className={isSidebarOpen && 'active'}>
       <div className="sidebar">
+        <img className="sidebar__img" src={home} alt="sidebar-img" />
         <FaTimes onClick={handleSidebar} className="navbar__icon" />
         <div className="sidebar__box">
           <Link onClick={handleSidebar} to="/">
@@ -48,6 +50,9 @@ const Wrapper = styled.aside`
   z-index: 999;
   &.active {
     transform: translateX(0);
+  }
+  .sidebar__img {
+    width: 70px;
   }
   .sidebar {
     margin: 2rem;

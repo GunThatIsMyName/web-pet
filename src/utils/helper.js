@@ -126,4 +126,6 @@ const FeaturedList = [
     subTitle: '만렙찍어서 리본을 고르고 ,',
   },
 ];
-export {shop_list, medalList, headerList, FeaturedList};
+
+const home = 'assets/header.png';
+export {shop_list, medalList, headerList, FeaturedList, home};

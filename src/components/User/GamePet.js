@@ -49,10 +49,12 @@ const Wrapper = styled.div`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  border-radius: 10px;
   .game__main__box {
     position: relative;
     width: 50%;
     height: 50%;
+
     img {
       position: absolute;
       width: 100%;
