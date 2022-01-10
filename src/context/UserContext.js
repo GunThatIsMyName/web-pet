@@ -163,6 +163,7 @@ const UserProvider = ({children}) => {
   };
 
   const updateStat = async (numberPoint, type) => {
+
     const newUsersDoc = doc(db, 'users', tempUserDoc);
     const {happy, health, level, money} = state.loadUser.userInfo;
 
