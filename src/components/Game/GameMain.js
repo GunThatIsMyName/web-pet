@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { GameInfo, GamePet } from "..";
+import React from 'react';
+import styled from 'styled-components';
+import {GameInfo, GamePet} from '..';
 
 function GameMain() {
   return (
     <Wrapper>
-      <GameInfo  />
+      <GameInfo />
       <GamePet />
     </Wrapper>
   );
@@ -14,8 +14,13 @@ function GameMain() {
 const Wrapper = styled.div`
   @media screen and (max-width: 1240px) {
     display: flex;
-    justify-content:center;
-    width:100%;
+    justify-content: center;
+    width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
   }
 `;
 
