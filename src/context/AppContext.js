@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
   const [isSidebarOpen, setSidebar] = useState(false);
   const [previewList, setPreviewList] = useState('');
 
+  // shop btn click
   const handleClick = (e) => {
     const { name } = e.target.dataset;
     setName(name);
@@ -20,6 +21,8 @@ const AppProvider = ({ children }) => {
     setIndex(newIndex.indexOf(0));
   };
   
+
+  // get Store Data
   const getData = () => {
     try {
       onSnapshot(petStoreRef, (snapshot) => {
@@ -34,6 +37,8 @@ const AppProvider = ({ children }) => {
     }
   };
 
+
+  // handle Sidebar
   const handleSidebar = () => {
     setSidebar((prev) => !prev);
   };
@@ -60,6 +65,7 @@ const AppProvider = ({ children }) => {
     })
   };
 
+  // Clothes controller
   const controlClothes = async (tempList) => {
     const newUsersDoc = doc(db, "users", tempUserDoc);
     await updateDoc(newUsersDoc, {

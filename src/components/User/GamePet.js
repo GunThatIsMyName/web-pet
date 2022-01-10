@@ -23,7 +23,7 @@ function GamePet() {
         <img src={basicImage} alt="basic-img" />
         {clothesList.map((item, index) => {
           if (realList[item]) {
-            return <img key={index} src={realList[item]} alt={item} />;
+            return <img style={{zIndex:item==="cap" && "bag" && "ribon"?99:0 }} key={index} src={realList[item]} alt={item} />;
           }
           return null;
         })}

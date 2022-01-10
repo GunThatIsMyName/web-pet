@@ -9,3 +9,5 @@ export const LOAD_USER_DATA="Load_userdata"
 export const BUY_ITEM="buy_Item";
 
 export const LOAD_USER_CLOTHES="LOADUSER_CLOTHES"
+
+export const STAT_CONTROL='stat_control';
