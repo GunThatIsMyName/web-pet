@@ -2,30 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import {BsPlus} from 'react-icons/bs';
 import {useUserContext} from '../../context/UserContext';
+import {ControlList} from '../../utils/helper';
 
 function Control() {
   const {handleStat} = useUserContext();
-  const list = [
-    {
-      id: 1,
-      name: '둘이 먹다 하나 죽어도 모를 밥 먹기',
-      type: 'health',
-      point: 30,
-    },
-    {
-      id: 2,
-      name: '헬스하고, 크로스핏하고, 행군 하고, 살빼기',
-      type: 'health',
-      point: 40,
-    },
-    {id: 3, name: '영끌할라고 죽어라 일해서 돈 벌기', type: 'happy', point: 20},
-    {
-      id: 4,
-      name: '아아아무것도 안하고, 숨쉬며 명상하기',
-      type: 'happy',
-      point: 60,
-    },
-  ];
 
   const handleClick = (e) => {
     const {type, point} = e.target.dataset;
@@ -34,13 +14,12 @@ function Control() {
 
   return (
     <Wrapper>
-      {list.map((item) => {
+      {ControlList.map((item) => {
         const {id, name, type, point} = item;
         return (
           <div className="control__item" key={id}>
             <h1>{name}</h1>
             <button className="control__item__btn">
-              {' '}
               <BsPlus
                 data-type={type}
                 data-point={point}
@@ -85,6 +64,18 @@ const Wrapper = styled.article`
       }
       &:active {
         transform: scale(0.9);
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size:1rem;
+    .control__item{
+      h1{
+        font-size:1rem;
+      }
+      .control__item__btn{
+        font-size:1.5rem;
       }
     }
   }

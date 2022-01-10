@@ -42,7 +42,7 @@ const levelList = [
   {level: 3, icon: '🥈'},
   {level: 4, icon: '🏅 '},
   {level: 5, icon: '🐯 '},
-  {level: 6, icon: ' 🥷🏼 '},
+  {level: 6, icon: '🥷🏼'},
   {level: 7, icon: '🦹🏼‍♀️'},
   {level: 8, icon: '🧙🏼‍♀️'},
   {level: 9, icon: '🧝🏼‍♀️ '},
@@ -51,7 +51,7 @@ const levelList = [
 const medalList = (level) => {
   let newMedal;
   levelList.find((item) => {
-    if (item.level === level) {
+    if (item.level === level%10) {
       return (newMedal = item.icon);
     }
     return null;
@@ -127,5 +127,31 @@ const FeaturedList = [
   },
 ];
 
+const ControlList = [
+  {
+    id: 1,
+    name: '둘이 먹다 하나 죽어도 모를 밥 먹기 ( + 30 Health ❤️ )',
+    type: 'health',
+    point: 30,
+  },
+  {
+    id: 2,
+    name: '헬스하고, 크로스핏하고, 행군 하고, 살빼기 ( + 40 Health ❤️ )',
+    type: 'health',
+    point: 40,
+  },
+  {
+    id: 3,
+    name: '영끌할라고 죽어라 일해서 돈 벌기 ( + 20 Happy ⭐️ )',
+    type: 'happy',
+    point: 20,
+  },
+  {
+    id: 4,
+    name: '아아아무것도 안하고, 숨쉬며 명상하기 ( + 60 Happy ⭐️ )',
+    type: 'happy',
+    point: 60,
+  },
+];
 const home = 'assets/header.png';
-export {shop_list, medalList, headerList, FeaturedList, home};
+export {shop_list, medalList, headerList, FeaturedList, home, ControlList};

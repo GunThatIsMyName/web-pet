@@ -17,11 +17,12 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin:2rem 0;
   gap: 2rem;
-  @media screen and (max-width: 1240px) {
-    display: grid;
+  @media screen and (max-width: 1330px) {
+    flex-direction:column;
     gap: 0;
-    align-items: flex-end;
+    margin:2rem;
   }
 `;
 
