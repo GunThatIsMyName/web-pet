@@ -1,15 +1,21 @@
 import {
   BUY_ITEM,
+  CLOSE_MODAL,
   LOAD_USER_CLOTHES,
   LOAD_USER_DATA,
   LOGIN_AUTH,
   LOGOUT_AUTH,
   OFF_LOADING,
+  OPEN_MODAL,
   SET_ERROR,
   SET_LOADING,
 } from '../utils/action';
 
 export const UserinitialState = {
+  isModalOpen:{
+    state:false,
+    affordable:false,
+  },
   user: {
     name: '',
     photo: '',
@@ -78,6 +84,19 @@ const UserReducer = (state, action) => {
         ...state,
         loadUser: newData,
       };
+
+
+    case OPEN_MODAL:
+      const status=action.payload;
+      return {...state,isModalOpen:{
+        ...state.isModalOpen,state:true,affordable:status
+      }};
+
+      case CLOSE_MODAL:
+      return {...state,isModalOpen:{
+        ...state.isModalOpen,state:false,affordable:false
+      }};
+
 
     default:
       throw new Error(`not matched any ${action.type}`);
