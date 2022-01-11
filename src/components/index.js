@@ -23,7 +23,7 @@ import GamePanel from './User/GamePanel';
 import GamePet from './User/GamePet';
 
 // Components
-
+import ShowItem from './Show/ShowItem';
 import Loader from './Loader';
 
 export {
@@ -43,4 +43,5 @@ export {
   GamePanel,
   GamePet,
   Loader,
+  ShowItem,
 };
