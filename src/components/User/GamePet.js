@@ -4,7 +4,7 @@ import { useUserContext } from "../../context/UserContext";
 import basicImage from "../../image/basic.png";
 
 const image =
-  "https://images.unsplash.com/photo-1615799998603-7c6270a45196?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80";
+  "https://images.unsplash.com/flagged/photo-1593005510329-8a4035a7238f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80";
 
 function GamePet({ ObjList, dataList, size }) {
   const { loadUser } = useUserContext();
@@ -32,7 +32,7 @@ function GamePet({ ObjList, dataList, size }) {
             }
             return (
               <img
-                style={{ zIndex: item === "cap" && "bag" && "ribon" ? 99 : 0 }}
+                style={{ zIndex: item==="cap" ||item==="bag" || item==="ribon" ? 99999 : 0 }}
                 key={index}
                 src={dataList[item]}
                 alt={item}
