@@ -13,13 +13,6 @@ function GamePet({ObjList, dataList, size}) {
     return null;
   }
 
-  if (ObjList[6] === 'bg') {
-    console.log('bg!!!!');
-  }
-  // console.log(ObjList[6] === 'bg', 'obj list');
-  // console.log(dataList.bg, 'data list');
-  // console.log(size, 'size');
-
   return (
     <Wrapper size={size} back={image}>
       <div className="game__main__box">
