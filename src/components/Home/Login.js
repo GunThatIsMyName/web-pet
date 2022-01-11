@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {useUserContext} from '../../context/UserContext';
 import image from '../../image/image.png';
+
 function Login() {
   const {loginAuth} = useUserContext();
   return (

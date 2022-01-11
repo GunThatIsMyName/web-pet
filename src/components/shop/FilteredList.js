@@ -34,7 +34,7 @@ function FilteredList({item}) {
           onClick={(e) => handleClothes(e, img, newName)}
           className={`shop__preview__btn ${checkItem ? null : 'active-power'}`}
         >
-          {checkItem ? '옷벗기' : '착용하기'}
+          {checkItem ? '벗기' : '착용하기'}
         </button>
       )}
 
@@ -57,14 +57,15 @@ const Wrapper = styled.div`
     background: var(--color-yellow);
   }
   .active-power {
-    background: black;
-    color: white;
+    background: var(--color-yellow);
+    color: black;
   }
   .filtered__list-item {
     display: flex;
     img {
       width: 130px;
       height: 130px;
+      border-radius: 10px;
     }
     .filtered__list__title {
       font-size: 1.6rem;
@@ -77,6 +78,7 @@ const Wrapper = styled.div`
     font-size: 1rem;
     font-weight: bold;
     padding: 0.3rem 1.3rem;
+    margin-top: 1rem;
     border: 1px solid black;
     border-radius: 5px;
     transition: all 0.2s linear;

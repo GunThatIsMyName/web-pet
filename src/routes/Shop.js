@@ -1,26 +1,28 @@
-import React from "react";
-import styled from "styled-components";
-import { FilteredList } from "../components";
-import { useGlobalContext } from "../context/AppContext";
-import { shop_list } from "../utils/helper";
+import React from 'react';
+import styled from 'styled-components';
+import {FilteredList} from '../components';
+import {useGlobalContext} from '../context/AppContext';
+import {shop_list} from '../utils/helper';
 
 function Shop() {
-  const { list, index, handleClick, newName } = useGlobalContext();
+  const {list, index, handleClick, newName} = useGlobalContext();
   if (!list[index]) {
     return null;
   }
 
   // ITEMS REFRESH  --------------------ITEMS REFRESH
-  const { items } = list[index];
+  const {items} = list[index];
 
   return (
     <Wrapper>
       <div className="shop__btn__list">
         {shop_list.map((item) => {
-          const { name, id, title } = item;
+          const {name, id, title} = item;
           return (
             <button
-              className={newName === item.name ? "shop-btn active" : "shop-btn"}
+              className={
+                newName === item.name ? 'shop-btn active-btn' : 'shop-btn'
+              }
               data-name={name}
               onClick={handleClick}
               key={id}
@@ -44,8 +46,12 @@ const Wrapper = styled.div`
   text-align: center;
   width: 100%;
   height: 100%;
+  .shop__btn__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
   .shop-btn {
-    padding: 0.3rem 1.3rem;
+    padding: 0rem 1.3rem;
     border: 2px solid black;
     border-radius: 10px;
     margin: 2rem 0.5rem;
@@ -57,6 +63,10 @@ const Wrapper = styled.div`
       background-color: black;
       color: white;
     }
+  }
+  .active-btn {
+    background: black;
+    color: white;
   }
   .shop__list {
     display: flex;
@@ -72,8 +82,16 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 600px) {
+    .shop__btn__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
     .shop__list {
       justify-content: center;
+    }
+    .shop-btn {
+      padding: 0.2rem 0.6rem;
+      font-size: 1rem;
     }
   }
 `;

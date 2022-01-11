@@ -1,13 +1,10 @@
-
-import React from "react";
-import { useUserContext } from "../../context/UserContext";
-import styled from "styled-components";
-import { GameInfo, GamePet } from "..";
-
+import React from 'react';
+import {useUserContext} from '../../context/UserContext';
+import styled from 'styled-components';
+import {GameInfo, GamePet} from '..';
 
 function GameMain() {
-  const { loadUser } = useUserContext();
-
+  const {loadUser} = useUserContext();
 
   if (!loadUser) {
     return null;
@@ -25,9 +22,9 @@ function GameMain() {
 }
 
 const Wrapper = styled.div`
-gap:2rem;
-@media screen and (max-width: 1330px) {
-    margin-bottom:2rem;
+  gap: 2rem;
+  @media screen and (max-width: 1330px) {
+    margin-bottom: 2rem;
     display: flex;
     justify-content: center;
     width: 100%;

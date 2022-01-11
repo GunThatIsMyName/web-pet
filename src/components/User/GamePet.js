@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useUserContext} from '../../context/UserContext';
-
 import basicImage from '../../image/basic.png';
 
 const image =
@@ -13,6 +12,13 @@ function GamePet({ObjList, dataList, size}) {
   if (!loadUser) {
     return null;
   }
+
+  if (ObjList[6] === 'bg') {
+    console.log('bg!!!!');
+  }
+  // console.log(ObjList[6] === 'bg', 'obj list');
+  // console.log(dataList.bg, 'data list');
+  // console.log(size, 'size');
 
   return (
     <Wrapper size={size} back={image}>

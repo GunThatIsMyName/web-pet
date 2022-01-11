@@ -1,9 +1,7 @@
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import {useUserContext} from './context/UserContext';
-import {Game, Home, Show} from './routes';
-
+import {Game, Home, Show, Shop} from './routes';
 import {Control, Loader, Login, Navbar, Sidebar} from './components';
-import Shop from './routes/Shop';
 
 const App = () => {
   const {user, loading} = useUserContext();

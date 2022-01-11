@@ -1,36 +1,45 @@
+import {BsController, BsShop} from 'react-icons/bs';
+
+const home = 'assets/header.png';
+
 const shop_list = [
   {
     id: 1,
+    title: '배경',
+    name: 'bg',
+  },
+  {
+    id: 2,
     title: '헤어',
     name: 'hair',
   },
   {
-    id: 2,
-    title: '헤어핀 / 모자',
+    id: 3,
+    title: '모자',
     name: 'cap',
   },
   {
-    id: 3,
+    id: 4,
     title: '악세사리',
     name: 'acc',
   },
   {
-    id: 4,
+    id: 5,
     title: '상의',
     name: 'tshirts',
   },
   {
-    id: 5,
+    id: 6,
     title: '안경',
     name: 'glass',
   },
   {
-    id: 6,
+    id: 7,
     title: '가방',
     name: 'bag',
   },
   {
-    id: 7,
+    id: 8,
     title: '리본',
     name: 'ribon',
   },
@@ -130,19 +139,19 @@ const FeaturedList = [
 const ControlList = [
   {
     id: 1,
-    name: '둘이 먹다 하나 죽어도 모를 밥 먹기 ( + 30 Health ❤️ )',
+    name: '둘이 먹다 하나 죽어도 모를 밥 먹기  ( + 30 Health ❤️ )',
     type: 'health',
     point: 30,
   },
   {
     id: 2,
-    name: '헬스하고, 크로스핏하고, 행군 하고, 살빼기 ( + 40 Health ❤️ )',
+    name: '헬스하고, 크로스핏하고, 행군 하고, 살빼기  ( + 40 Health ❤️ )',
     type: 'health',
     point: 40,
   },
   {
     id: 3,
-    name: '영끌할라고 죽어라 일해서 돈 벌기 ( + 20 Happy ⭐️ )',
+    name: '영끌 위해서 죽어라 일해서 돈 벌기  ( + 20 Happy ⭐️ )',
     type: 'happy',
     point: 20,
   },
@@ -153,5 +162,18 @@ const ControlList = [
     point: 60,
   },
 ];
-const home = 'assets/header.png';
-export {shop_list, medalList, headerList, FeaturedList, home, ControlList};
+
+const todoList = [
+  {id: 1, path: '', name: 'control', icon: <BsController />},
+  {id: 2, path: 'shop', name: 'shop', icon: <BsShop />},
+];
+
+export {
+  shop_list,
+  medalList,
+  headerList,
+  FeaturedList,
+  home,
+  todoList,
+  ControlList,
+};

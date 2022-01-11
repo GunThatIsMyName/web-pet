@@ -13,6 +13,7 @@ function GameLevel() {
   const {
     userInfo: {level, money},
   } = loadUser;
+
   return (
     <Wrapper>
       <h1>
