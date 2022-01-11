@@ -56,8 +56,8 @@ const Wrapper = styled.div`
     background: var(--color-yellow);
   }
   .active-power {
-    background: black;
-    color: white;
+    background: var(--color-yellow);
+    color: black;
   }
   .filtered__list-item {
     display: flex;
