@@ -34,7 +34,7 @@ function FilteredList({item}) {
           onClick={(e) => handleClothes(e, img, newName)}
           className={`shop__preview__btn ${checkItem ? null : 'active-power'}`}
         >
-          {checkItem ? '옷벗기' : '착용하기'}
+          {checkItem ? '벗기' : '착용하기'}
         </button>
       )}
 
