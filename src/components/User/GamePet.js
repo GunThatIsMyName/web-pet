@@ -1,27 +1,38 @@
-import React from 'react';
-import styled from 'styled-components';
-import {useUserContext} from '../../context/UserContext';
-import basicImage from '../../image/basic.png';
+import React from "react";
+import styled from "styled-components";
+import { useUserContext } from "../../context/UserContext";
+import basicImage from "../../image/basic.png";
 
 const image =
-  'https://cdn.dribbble.com/users/5085092/screenshots/15704565/media/22d3003af8ef76a3f04e46313370b67d.jpg';
+  "https://images.unsplash.com/flagged/photo-1593005510329-8a4035a7238f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80";
 
-function GamePet({ObjList, dataList, size}) {
-  const {loadUser} = useUserContext();
+function GamePet({ ObjList, dataList, size }) {
+  const { loadUser } = useUserContext();
 
   if (!loadUser) {
     return null;
   }
 
+
+  let newData;
+  ObjList.find((item) => {
+    if (item === "bg") {
+      return (newData = dataList[item]);
+    }
+    return null;
+  });
   return (
-    <Wrapper size={size} back={image}>
+    <Wrapper size={size} back={newData ? newData : image}>
       <div className="game__main__box">
         <img src={basicImage} alt="basic-img" />
         {ObjList.map((item, index) => {
           if (dataList[item]) {
+            if (item === "bg") {
+              return null;
+            }
             return (
               <img
-                style={{zIndex: item === 'cap' && 'bag' && 'ribon' ? 99 : 0}}
+                style={{ zIndex: item==="cap" ||item==="bag" || item==="ribon" ? 99999 : 0 }}
                 key={index}
                 src={dataList[item]}
                 alt={item}
@@ -46,6 +57,7 @@ const Wrapper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10px;
+  z-index: 0;
   .game__main__box {
     position: relative;
     width: 50%;

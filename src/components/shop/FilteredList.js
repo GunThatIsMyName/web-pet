@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BuyBtnModal } from '..';
 import {useGlobalContext} from '../../context/AppContext';
 import {useUserContext} from '../../context/UserContext';
-import BuyBtnModal from './BuyBtnModal';
 
 function FilteredList({item}) {
   const {newName, previewList, handleClothes} = useGlobalContext();
   const {loadUser,isModalOpen,handleBtn} = useUserContext();
   const {id, img, price} = item;
-
 
   if (!loadUser) {
     return null;

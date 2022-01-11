@@ -2,7 +2,7 @@
 import Control from './Game/Control';
 import ControlList from './Game/ControlList';
 import GameControl from './Game/GameControl';
-import GameMain from './Game/GameMain';
+import GameMain from './User/GameMain';
 
 // Home Components
 
@@ -23,7 +23,9 @@ import GamePanel from './User/GamePanel';
 import GamePet from './User/GamePet';
 
 // Components
+
 import ShowItem from './Show/ShowItem';
+import BuyBtnModal from './shop/BuyBtnModal';
 import Loader from './Loader';
 
 export {
@@ -44,4 +46,5 @@ export {
   GamePet,
   Loader,
   ShowItem,
+  BuyBtnModal
 };
