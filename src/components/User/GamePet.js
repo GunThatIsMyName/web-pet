@@ -13,6 +13,7 @@ function GamePet({ ObjList, dataList, size }) {
     return null;
   }
 
+
   let newData;
   ObjList.find((item) => {
     if (item === "bg") {
@@ -20,7 +21,6 @@ function GamePet({ ObjList, dataList, size }) {
     }
     return null;
   });
-
   return (
     <Wrapper size={size} back={newData ? newData : image}>
       <div className="game__main__box">

@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { GamePet } from "..";
-import { medalList } from "../../utils/helper";
+import React from 'react';
+import styled from 'styled-components';
+import {GamePet} from '..';
+import {medalList} from '../../utils/helper';
 
-function ShowItem({ clothesList, userClothes, userInfo }) {
+function ShowItem({clothesList, userClothes, userInfo}) {
   return (
     <Wrapper>
       {/* Resusable Components */}
@@ -22,6 +22,9 @@ function ShowItem({ clothesList, userClothes, userInfo }) {
         <div className="show__user__level">
           {medalList(userInfo.level)} level {userInfo.level}
         </div>
+        <div>
+          <span className="show__user__level">💰 {userInfo.money} 메소</span>
+        </div>
       </div>
     </Wrapper>
   );
@@ -31,7 +34,7 @@ const Wrapper = styled.article`
   background: var(--color-white);
   color: var(--color-black);
   .show__user {
-      padding:5px;
+    padding: 5px;
     .show__user__header {
       display: flex;
       justify-content: space-between;
@@ -49,6 +52,7 @@ const Wrapper = styled.article`
     .show__user__level {
       font-size: 1.3rem;
       word-spacing: 10px;
+      margin: 0.5rem;
     }
   }
 `;
