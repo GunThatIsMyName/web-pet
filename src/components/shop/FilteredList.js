@@ -64,6 +64,7 @@ const Wrapper = styled.div`
     img {
       width: 130px;
       height: 130px;
+      border-radius: 10px;
     }
     .filtered__list__title {
       font-size: 1.6rem;
@@ -76,6 +77,7 @@ const Wrapper = styled.div`
     font-size: 1rem;
     font-weight: bold;
     padding: 0.3rem 1.3rem;
+    margin-top: 1rem;
     border: 1px solid black;
     border-radius: 5px;
     transition: all 0.2s linear;

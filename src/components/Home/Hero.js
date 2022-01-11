@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import image from '../../image/image.png';
 
@@ -15,7 +16,9 @@ function Hero() {
             함께 캐릭터를 꾸민 후에 <br />
             다른 유저들의 캐릭터도 확인해보세요
           </p>
-          <button className="hero__btn">Start Game</button>
+          <Link to="/game">
+            <button className="hero__btn">Start Game</button>
+          </Link>
         </div>
 
         <div className="hero__image">

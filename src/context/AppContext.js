@@ -8,7 +8,7 @@ const AppContext = React.createContext();
 const AppProvider = ({children}) => {
   const [list, setList] = useState([]);
   const [index, setIndex] = useState(0);
-  const [newName, setName] = useState('hair');
+  const [newName, setName] = useState('bg');
   const {tempUserDoc, loadUser} = useUserContext();
   const [isSidebarOpen, setSidebar] = useState(false);
   const [previewList, setPreviewList] = useState('');

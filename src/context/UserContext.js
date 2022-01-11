@@ -1,11 +1,8 @@
 import React, {useContext, useEffect, useReducer, useState} from 'react';
-
 import {signInWithPopup} from 'firebase/auth';
 import {doc, getDoc, onSnapshot, setDoc, updateDoc} from 'firebase/firestore';
 import {auth, db, provider} from '../firebase';
-
 import UserReducer, {UserinitialState} from '../reducer/UserReducer';
-
 import {
   BUY_ITEM,
   LOAD_USER_CLOTHES,
@@ -87,6 +84,7 @@ const UserProvider = ({children}) => {
         glass: '',
         ribon: '',
         tshirts: '',
+        bg: '',
       },
       boughtItem: {
         hair: [],
@@ -96,6 +94,7 @@ const UserProvider = ({children}) => {
         glass: [],
         ribon: [],
         tshirts: [],
+        bg: [],
       },
     };
 

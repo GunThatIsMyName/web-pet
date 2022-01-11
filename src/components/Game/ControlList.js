@@ -1,19 +1,14 @@
 import React from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
-import {BsController, BsShop} from 'react-icons/bs';
-
-const list = [
-  {id: 1, path: '', name: 'control', icon: <BsController />},
-  {id: 2, path: 'shop', name: 'shop', icon: <BsShop />},
-];
+import {todoList} from '../../utils/helper';
 
 function ControlList() {
   const {pathname} = useLocation();
   const currentRoute = pathname.substring(6);
   return (
     <Wrapper className="control__list">
-      {list.map((item) => {
+      {todoList.map((item) => {
         const {id, path, name, icon} = item;
         return (
           <Link key={id} to={path}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import GameControl from '../components/Game/GameControl';
-import GameMain from '../components/Game/GameMain';
+import {GameControl, GameMain} from '../components';
 
 function Game() {
   return (
@@ -17,12 +16,12 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin:2rem 0;
+  margin: 2rem 0;
   gap: 2rem;
   @media screen and (max-width: 1330px) {
-    flex-direction:column;
+    flex-direction: column;
     gap: 0;
-    margin:2rem;
+    margin: 2rem;
   }
 `;
 
