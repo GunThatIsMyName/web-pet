@@ -229,12 +229,10 @@ const UserProvider = ({children}) => {
   };
 
   const openModal=(status)=>{
-    console.log("open")
     dispatch({type:OPEN_MODAL,payload:status});
   }
 
   const closeModal=(e)=>{
-    console.log("close")
     const {btn}=e.target.dataset;
     if(!btn){
       return;
@@ -278,3 +276,5 @@ export const useUserContext = () => {
   return useContext(UserContext);
 };
 export default UserProvider;
+
+// 
