@@ -1,8 +1,8 @@
-import { getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import ShowItem from "../components/Show/ShowItem";
-import { usersRef } from "../firebase";
+import {getDocs} from 'firebase/firestore';
+import React, {useEffect, useState} from 'react';
+import styled from 'styled-components';
+import {ShowItem} from '../components';
+import {usersRef} from '../firebase';
 
 function Show() {
   const [displayList, setDisplay] = useState([]);
@@ -11,8 +11,8 @@ function Show() {
     let newList = [];
     const docs = await getDocs(usersRef);
     docs.docs.map((item) => {
-      const { userClothes, userInfo } = item.data();
-      return newList.push({ id: item.id, userInfo, userClothes });
+      const {userClothes, userInfo} = item.data();
+      return newList.push({id: item.id, userInfo, userClothes});
     });
     setDisplay(newList);
   };

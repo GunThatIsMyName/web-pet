@@ -2,14 +2,16 @@ import {initializeApp} from 'firebase/app';
 import {getFirestore, collection} from 'firebase/firestore';
 import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 
+const BASIC_API = process.env;
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyCfz6XNrtCzIi4cRaWwygI6jZUO5cQZdBE',
-  authDomain: 'web-pet-94891.firebaseapp.com',
-  projectId: 'web-pet-94891',
-  storageBucket: 'web-pet-94891.appspot.com',
-  messagingSenderId: '334997553483',
-  appId: '1:334997553483:web:de1f3416efb9ebbc8268ce',
-  measurementId: 'G-KB4K14HE5T',
+  apiKey: BASIC_API.REACT_APP_API_KEY,
+  authDomain: BASIC_API.REACT_APP_AUTH,
+  projectId: BASIC_API.REACT_APP_PROJECT_ID,
+  storageBucket: BASIC_API.REACT_APP_STORAGE,
+  messagingSenderId: BASIC_API.REACT_APP_MESSAGE,
+  appId: BASIC_API.REACT_APP_ID,
+  measurementId: BASIC_API.REACT_APP_MEASURE_ID,
 };
 
 initializeApp(firebaseConfig);
