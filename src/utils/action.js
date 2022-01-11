@@ -11,3 +11,5 @@ export const BUY_ITEM="buy_Item";
 export const LOAD_USER_CLOTHES="LOADUSER_CLOTHES"
 
 export const STAT_CONTROL='stat_control';
+export const OPEN_MODAL="open_modal"
+export const CLOSE_MODAL="CLOSE_MODAL"

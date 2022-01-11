@@ -62,12 +62,13 @@ const Wrapper = styled.div`
         background-color: var(--color-dark);
         position: relative;
         .info__progress {
+          transition:0.3s linear;
           position: absolute;
           left: 0;
           top: 0;
           height: inherit;
           border-radius: inherit;
-          background-color: yellow;
+          background-color: var(--color-green);
         }
       }
     }

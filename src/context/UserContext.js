@@ -8,11 +8,13 @@ import UserReducer, {UserinitialState} from '../reducer/UserReducer';
 
 import {
   BUY_ITEM,
+  CLOSE_MODAL,
   LOAD_USER_CLOTHES,
   LOAD_USER_DATA,
   LOGIN_AUTH,
   LOGOUT_AUTH,
   OFF_LOADING,
+  OPEN_MODAL,
   SET_ERROR,
   SET_LOADING,
 } from '../utils/action';
@@ -149,16 +151,15 @@ const UserProvider = ({children}) => {
     const userMoney = state.loadUser && Number(state.loadUser.userInfo.money);
 
     if (productPrice <= userMoney) {
-      const popup = window.confirm('아이템을 구매하시겠습니까?');
-      if (popup) {
+     
         const newItems = {...state.loadUser.boughtItem};
         newItems[newName].push(id);
         const restPrice = userMoney - productPrice;
         dispatch({type: BUY_ITEM, payload: {newItems, restPrice}});
         updateUserData(newItems, restPrice);
-      }
+        openModal(true)
     } else {
-      window.confirm('돈이 부족합니다. 밥을 먹이러 가시겠습니까?');
+      openModal(false);
     }
   };
 
@@ -228,6 +229,20 @@ const UserProvider = ({children}) => {
     });
   };
 
+  const openModal=(status)=>{
+    console.log("open")
+    dispatch({type:OPEN_MODAL,payload:status});
+  }
+
+  const closeModal=(e)=>{
+    console.log("close")
+    const {btn}=e.target.dataset;
+    if(!btn){
+      return;
+    }
+    dispatch({type:CLOSE_MODAL})
+  }
+
   // Use Effect --------------------------------------------
 
   useEffect(() => {
@@ -251,6 +266,8 @@ const UserProvider = ({children}) => {
         loginAuth,
         logoutAuth,
         handleBtn,
+        openModal,
+        closeModal
       }}
     >
       {children}

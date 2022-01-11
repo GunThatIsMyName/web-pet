@@ -2,15 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import {useGlobalContext} from '../../context/AppContext';
 import {useUserContext} from '../../context/UserContext';
+import BuyBtnModal from './BuyBtnModal';
 
 function FilteredList({item}) {
   const {newName, previewList, handleClothes} = useGlobalContext();
-  const {handleBtn, loadUser} = useUserContext();
+  const {loadUser,isModalOpen,handleBtn} = useUserContext();
   const {id, img, price} = item;
 
-  const handleBuy = ({id, price}) => {
-    handleBtn(id, price, newName);
-  };
 
   if (!loadUser) {
     return null;
@@ -20,6 +18,8 @@ function FilteredList({item}) {
   const checkItem = previewList[newName] === img;
 
   return (
+    <>
+    {isModalOpen.state && <BuyBtnModal {...item} />}
     <Wrapper
       className={`filtered__list ${checkItem ? 'active' : null}`}
       key={id}
@@ -39,9 +39,10 @@ function FilteredList({item}) {
       )}
 
       {!list.includes(id) && (
-        <button onClick={() => handleBuy(item)}>구매하기</button>
+        <button data-btn="open" onClick={()=>handleBtn(id,price,newName)}>구매하기</button>
       )}
     </Wrapper>
+    </>
   );
 }
 
