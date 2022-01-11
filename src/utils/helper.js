@@ -46,12 +46,12 @@ const levelList = [
   {level: 7, icon: '🦹🏼‍♀️'},
   {level: 8, icon: '🧙🏼‍♀️'},
   {level: 9, icon: '🧝🏼‍♀️ '},
-  {level: 10, icon: '🧛🏼‍♀️ '},
+  {level: 0, icon: '🧛🏼‍♀️ '},
 ];
 const medalList = (level) => {
   let newMedal;
   levelList.find((item) => {
-    if (item.level === level%10) {
+    if (item.level === level % 10) {
       return (newMedal = item.icon);
     }
     return null;

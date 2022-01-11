@@ -1,14 +1,14 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useUserContext } from "./context/UserContext";
-import { Game, Home, Show } from "./routes";
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
+import {useUserContext} from './context/UserContext';
+import {Game, Home, Show} from './routes';
 
-import { Control, Footer, Loader, Login, Navbar, Sidebar } from "./components";
-import Shop from "./routes/Shop";
+import {Control, Loader, Login, Navbar, Sidebar} from './components';
+import Shop from './routes/Shop';
 
 const App = () => {
-  const { user, loading } = useUserContext();
-  const { name, photo, email } = user;
-  const isLoggedIn = name !== "" && photo !== "" && email !== "";
+  const {user, loading} = useUserContext();
+  const {name, photo, email} = user;
+  const isLoggedIn = name !== '' && photo !== '' && email !== '';
 
   if (loading) {
     return <Loader />;
@@ -36,7 +36,6 @@ const App = () => {
           {/* EVERY WRORN ROUTE GOES TO HOME */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

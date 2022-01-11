@@ -8,7 +8,6 @@ import GameMain from './Game/GameMain';
 
 import AboutItem from './Home/AboutItem';
 import Featured from './Home/Featured';
-import Footer from './Home/Footer';
 import Hero from './Home/Hero';
 import Login from './Home/Login';
 import Navbar from './Home/Navbar';
@@ -34,7 +33,6 @@ export {
   GameMain,
   AboutItem,
   Featured,
-  Footer,
   Hero,
   Login,
   Navbar,
