@@ -39,12 +39,12 @@
     <img width="350" src="https://user-images.githubusercontent.com/59499779/149330189-a06e6061-2068-4531-88e1-f8704a6c0f39.png">
 </div>
 
-## Contributors
+## 🌙 Contributors
 <center>
   <table>
       <td align="center">
         <a href="https://github.com/GunThatIsMyName">
-          <img width="100" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40" alt=""><br/>
+          <img width="200" src="https://avatars.githubusercontent.com/u/71690036?s=400&u=c953cb00f27946b7cb2a2c60ed38ec7a9b668f8c&v=4" alt=""><br/>
           <sub><b>이준현</b></sub>
         </a>
       </td>
